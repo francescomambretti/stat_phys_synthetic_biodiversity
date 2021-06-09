@@ -17,8 +17,8 @@
 
 using namespace std;
 
-int check_max_cons_overlap(vector<int>,vector<int>,int,int);
-int check_tot_overlap(vector<int>,vector<int>,int,int);
+int check_max_cons_overlap(vector<int>,vector<int>,int,int,int&);
+int check_tot_overlap(vector<int>,vector<int>,int,int,int);
 bool match (int,int);
 
 #endif /* null_model_crosscheck_hpp */

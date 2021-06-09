@@ -1,3 +1,5 @@
+# plot the 2D-histogram of the largest maximum consecutive overlap vs the corresponding total overlap measured at the position which corresponds to the begin of the chosen largest maximum consecutive overlap subsequence
+
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -5,24 +7,18 @@ import os
 x=np.loadtxt("all_max_cons_overlaps.dat",unpack=True)
 y=np.loadtxt("all_tot_overlaps.dat",unpack=True)
 
-#fig = plt.figure()
-  
-# syntax for 3-D projection
-#ax = plt.axes(projection ='3d')
+plt.xlabel("$\\bar{a}$")
+plt.ylabel("$a_{tot}$")
 
-#ax.plot3D(np.arange(0,10000,1), x, y, 'orangered', linestyle='none',marker='o',markersize=4)
+plt.hist2d(x, y, bins=(np.arange(0,21,1),np.arange(0,21,1)), cmap=plt.cm.gist_heat_r)
+plt.xlim(0,21)
+plt.ylim(0,21)
 
-#ax.set_xlabel("Throw")
-#ax.set_ylabel("largest $a_{max}$")
-#ax.set_zlabel("largest $a_{tot}$")
+plt.xticks(np.arange(0,21,1),labels=np.arange(0,21,1),ha='left')
+plt.yticks(np.arange(0,21,1),labels=np.arange(0,21,1))
 
-#plt.plot(x/y,marker='o',color='navy',linestyle='none')
-num_bin=20
-plt.hist(x/y,bins=num_bin,label='$a_{max}/a_{tot}$',edgecolor='black')
-#plt.hist(y,bins=num_bin,label='$a_{tot}$')
-#plt.show()
-
-plt.legend()
+plt.colorbar()
+plt.grid()
 
 plt.savefig("compare.png",dpi=150)
 os.system("open compare.png")

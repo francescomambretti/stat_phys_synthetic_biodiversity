@@ -8,8 +8,11 @@
 //  Matching bases: 0-1 and 2-3
 //  Accepts as input the number of strands to be generated and a random seed
 //
+//  Update 09/06/21: the tot overlap is computed only for the position for which the largest maximum overlap is found
+
 
 #include "max_and_tot_overlap.hpp"
+#define DEBUG
 
 using namespace std;
 
@@ -41,7 +44,7 @@ int main(int argc, char** argv){
     
     //generate population of random strands and check their max consecutive overlap with the target
     
-    int appo, appo2;
+    int appo, appo2, pos;
     ofstream outFile("all_max_cons_overlaps.dat");
     ofstream outFile2("all_tot_overlaps.dat");
     
@@ -51,9 +54,24 @@ int main(int argc, char** argv){
             //cout << b << '\t' << predator[b] << endl;
         }
         
-        appo=check_max_cons_overlap(target,predator,l,L);
-        appo2=check_tot_overlap(target,predator,l,L);
-        //cout << appo << endl;
+        appo=check_max_cons_overlap(target,predator,l,L,pos);
+        appo2=check_tot_overlap(target,predator,l,L,pos);
+
+         #ifdef DEBUG
+        if (appo2 < appo){
+            cout << pos <<  '\t' << appo << endl << endl;
+            for (int i=0; i < pos; ++i)
+                cout << predator [i] << endl;
+            for (int i=pos; i < l+pos; ++i)
+                cout << predator [i] << '\t' << target[i-pos] << endl;
+            for (int i=l+pos; i < L; ++i )
+                cout << predator [i] << endl;
+        
+            cout << pos <<  '\t' << appo2 << endl << endl;
+            return -1;
+        }
+         #endif
+        
         outFile << appo << endl;
         outFile2 << appo2 << endl;
     }
@@ -61,7 +79,7 @@ int main(int argc, char** argv){
     outFile.close();
     outFile2.close();
     
-    system("python compare.py");
+    system("python compare.py"); //generate contour plot with a_tot vs a_max
     
     return 0;
 }
@@ -73,7 +91,7 @@ int main(int argc, char** argv){
 // check_max_cons_overlap
 //======================================
 
-int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int L){
+int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int L, int & pos){
     
     int my_max = 0, temp_max;
     int p,q; //counter
@@ -92,8 +110,10 @@ int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int 
             else p++;
         }
         temp_max=*max_element(overlaps.begin(), overlaps.end());
-        if (temp_max > my_max)
+        if (temp_max > my_max){
             my_max = temp_max;
+            pos = i; //save the position of the target left end
+        }
     }
     
     // overlap with resource partly beyond predator bounds
@@ -112,12 +132,16 @@ int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int 
             else q++;
         }
         temp_max=*max_element(overlaps.begin(), overlaps.end());
-        if (temp_max > my_max)
+        if (temp_max > my_max){
             my_max = temp_max;
+            pos = -(l-1-i); //save the position of the target left end
+        }
         
         temp_max=*max_element(overlaps_q.begin(), overlaps_q.end());
-        if (temp_max > my_max)
+        if (temp_max > my_max){
             my_max = temp_max;
+            pos = L-1-i;
+        }
      }
     
     return my_max;
@@ -127,46 +151,35 @@ int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int 
 // check_tot_overlap
 //======================================
 
-int check_tot_overlap(vector<int> target, vector<int> predator, int l, int L){
+int check_tot_overlap(vector<int> target, vector<int> predator, int l, int L, int pos){
     
-    int my_max = 0;
-    int tot=0, tot_2=0;
-    int i,j;
-    int limit_loop = L-l+1;
-    
-    // overlap with resource completely over predator
-    for (i=0;i< limit_loop;++i) {
-        tot=0;
-        for (j=i;j<l+i;++j) { // internal target index, always take l values
-            if (match (target[j-i], predator[j])) //they match
-                tot++;
-        }
-        
-        if (tot > my_max)
-            my_max = tot;
+    int my_max = 0, tot=0, j, start;
+    int limit_loop;
+    // we only want to know the total overlap in correspondence of the given relative position 'pos' between target and predator
+
+    if (0<= pos and pos <=L-l){
+        start=pos;
+        limit_loop=pos+l;
     }
-    
-    // overlap with resource partly beyond predator bounds
-    // left and right "excess parts" are treated exploiting symmetry
-    for (i=0;i<l-1;++i) {
-        tot=0;
-        tot_2=0;
-        for (j=0;j<=i;++j) {
-            if ( match(target[l-1-j], predator[i-j]))
-                tot++;
-            
-            if ( match(target[j], predator[L-1-i+j]))
-                tot_2++;
-        }
-        
-        if (tot > my_max)
-            my_max = tot;
-        
-        if (tot_2 > my_max)
-            my_max = tot_2;
-     }
-    
-    return my_max;
+
+    else if (pos < 0){
+        start=0;
+        limit_loop=l+pos;
+    }
+
+    else if (pos > L-l){
+        start=pos;
+        limit_loop=L;
+    }
+
+
+    tot=0;
+    for (j=start; j < limit_loop; ++j){
+        if (match (target[j-pos], predator[j])) //they match
+            tot++;
+    }
+
+    return tot;
 }
 
 
