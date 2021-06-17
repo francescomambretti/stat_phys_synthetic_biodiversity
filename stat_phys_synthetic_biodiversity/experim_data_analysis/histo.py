@@ -1,4 +1,4 @@
-# created by Francesco Mambretti on 15/06/2021
+# created by Francesco Mambretti on 15/03/2021
 # plot the histogram of the relative species abundance for three cycles - can be easily adapted to arbitrary number of cycles
 #
 
@@ -28,17 +28,18 @@ np.savetxt('./R3-03_ready/histogram.txt',histo1,fmt='%d')
 np.savetxt('./R6-03_ready/histogram.txt',histo2,fmt='%d')
 np.savetxt('./R9-03_ready/histogram.txt',histo3,fmt='%d')
 
-plt.hist(x=data1, color='blue',alpha=1.0, edgecolor='black',rwidth=0.95,align='left',bins=np.arange(0,21,1),weights=weights1,label='cycle 3')
-plt.hist(x=data2, color='red',alpha=1.0, edgecolor='black',rwidth=0.65,align='left',bins=np.arange(0,21,1),weights=weights2,label='cycle 6')
-plt.hist(x=data3, color='gold',alpha=0.6, edgecolor='black',rwidth=0.4,align='left',bins=np.arange(0,21,1),weights=weights3,label='cycle 9')
-plt.xticks(np.arange(0,21,1))
-plt.xlabel("largest $a_{max}$ - species index")
-plt.ylabel("relative abundance")
+plt.hist(x=data1, color='gold',alpha=1.0, edgecolor='black',rwidth=0.75,align='left',bins=np.arange(0,21,1),weights=weights1,label='cycle 3')
+plt.hist(x=data2, color='red',alpha=1.0, edgecolor='black',rwidth=0.5,align='left',bins=np.arange(0,21,1),weights=weights2,label='cycle 6')
+plt.hist(x=data3, color='blue',alpha=0.6, edgecolor='black',rwidth=0.25,align='left',bins=np.arange(0,21,1),weights=weights3,label='cycle 9')
+plt.xticks(np.arange(0,21,2),fontsize=14)
+plt.yticks((1e-03,1e-05,1e-04,1e-03,1e-02,1e-01,2e-01),fontsize=16)
+plt.xlabel("$\\bar{a}$ - species index",fontsize=15)
+plt.ylabel("relative abundance",fontsize=16)
 
 plt.yscale('log')
 
-plt.legend()
+plt.legend(fontsize=14)
 
 plt.tight_layout()
-plt.savefig("histogram-03.png",dpi=150)
+plt.savefig("histogram-03.png",dpi=300)
 os.system("open histogram-03.png")
