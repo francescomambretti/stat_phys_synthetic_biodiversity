@@ -6,6 +6,7 @@
 //  Generate a population of L-long DNA strands and subsequently check their maximum consecutive overlap with l-long target strand
 //  Matching bases: 0-1 and 2-3
 //
+//  Modified on 23/06/2021 --> fixed little problem with max consecutive overlap calculation
 
 #include "null_model_constraint.hpp"
 
@@ -70,10 +71,9 @@ int check_max_cons_overlap(vector<int> target, vector<int> predator, int l, int 
     vector<int> overlaps (l,0);
     vector<int> overlaps_q (l,0);
     int i,j;
-    int limit_loop = L-l+1;
     
     // overlap with resource completely over predator
-    for (i=0;i< limit_loop;++i) {
+    for (i=0;i<= L-l;++i) {
         fill(overlaps.begin(), overlaps.end(), 0);
         p=0; //it counts consecutive overlaps
         for (j=i;j<l+i;++j) { // internal target index, always take l values

@@ -8,6 +8,8 @@ plt.xticks(np.arange(0,21,1))
 plt.xlabel("overlap")
 plt.ylabel("Count (overlap)")
 
+plt.yscale('log')
+
 plt.tight_layout()
 plt.savefig("histogram.png",dpi=150)
 os.system("open histogram.png")
