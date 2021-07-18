@@ -14,8 +14,8 @@ The code is described at the beginning of the .cpp file
 
 -------------------------------------
 
-histo.py: does the histogram of the relative species abundance. It has to be internally modified to change the input files
+`histo.py`: does the histogram of the relative species abundance. It has to be internally modified to change the input files
 
 -------------------------------------
 
-compare.py: 2D histogram of maximum and total consecutive overlaps
+`compare.py`: 2D histogram of maximum and total consecutive overlaps
