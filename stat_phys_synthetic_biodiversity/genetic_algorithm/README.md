@@ -42,3 +42,4 @@ Currently, three selection criteria have been inserted:
 
 The code outputs a file called `histogram*.dat` for each generation `*`, which contains the list of the fitnesses of each of the survived predators, before the amplification process.
 The program also outputs some files named `pred_histF_cycle_*.dat` where `F` represents the fitness and `*` the cycle. This file contains the list of the `L`-long sequences having a fitness `F` after cycle `*`. This is a way to spot the emergence of dominating sequences during an evolution process.
+
