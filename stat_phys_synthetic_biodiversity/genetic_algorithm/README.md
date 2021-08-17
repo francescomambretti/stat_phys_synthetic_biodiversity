@@ -36,7 +36,7 @@ For each generation (the number can be set in the input file), `N_res` predators
 Each parallel rank executes its own evolution process, and the results are saved in a dedicated folder, called `seedS`, where `S` is a unique index referring to each rank.
 
 Currently, three selection criteria have been inserted: 
-- selection based on the fitness of each predator (defined as the maximum consecutive overlaps between the predator and the resource), 
+- selection based on the fitness of each predator (defined as the maximum consecutive overlap between the predator and the resource), 
 - selection based on the fitness, with an asymptotic fitness attributed after a threshold, 
 - purely random selection, regardless of the fitness of the predator 
 
