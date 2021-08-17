@@ -24,7 +24,8 @@ To execute: `mpiexec -np PROCS ./evolution        input file name     random gen
 - `global.h` contains the declaration of global variables with the `extern` keyword
 - the random number class is declared and defined in the `random.h` and `random.cpp` files
 - `seed.in` contains the initial common seed, `Primes` contains couples of numbers used to distinguish the random numbers sequence generated for each rank, `input.dat` the input information and the `makefile` is self-explaining
-- Jupyter Notebooks for analysis are not provided in the current version (still under development)
+- two Python scripts are provided for post-processing. `analysis_statistics.py`  generates a picture named `ave_histo_RSA.png` which contains the RSA histogram averaged over a given number of independent simulations
+`compare_ga_null.py` compares the RSA histogram (for all the selection criteria) at a chosen cycle with the null model with and without threshold
 
 ************************************************************************************************************************************************
 
