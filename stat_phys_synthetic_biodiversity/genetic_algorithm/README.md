@@ -8,6 +8,7 @@
 - Armadillo libraries, http://arma.sourceforge.net/ (tested with 9.900.5 and 10.6.2 versions)
 - OpenMP libraries
 - optional (but useful): Lapack & BLAS
+- Python3
 
 ************************************************************************************************************************************************
 

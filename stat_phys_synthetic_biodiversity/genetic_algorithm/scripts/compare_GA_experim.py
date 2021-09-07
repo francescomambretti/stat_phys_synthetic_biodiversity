@@ -1,4 +1,4 @@
-d## Written by Francesco Mambretti
+## Written by Francesco Mambretti
 ## 04/09/2021
 ## Plot the RMS distance between the outcome of each cycle for the RSA histogram and the experimental data (at a given cycle)
 ## KS test added
@@ -28,8 +28,8 @@ for a in alpha_list:
 	print("alpha={}".format(a))
 	d1=np.zeros(0)
 	d2=np.zeros(0)
-	ks1=np.zeros(0)
-	ks2=np.zeros(0)
+	ks1=np.zeros((0,2))
+	ks2=np.zeros((0,2))
 	for g in range (0,gens+1,1):  # modify according to the need
 	#	print(g)
 		ave_histoF=np.zeros(l+1)
@@ -77,16 +77,18 @@ for a in alpha_list:
 		ks1_s,ks1_p=ks_2samp(experim, ave_histoF)
 		ks2_s,ks2_p=ks_2samp(experim, ave_histoFS)
 
-		ks1=np.append(ks1,np.hstack([ks1_s,ks1_p]))
-		ks2=np.append(ks2,np.hstack([ks2_s,ks2_p]))
+		ks1=np.vstack((ks1,[ks1_s,ks1_p]))
+		ks1=np.vstack((ks2,[ks2_s,ks2_p]))
 
 #		print("For alpha={}, cycle {} yields an euclidean distance of the RSA histogram equal to:".format(a,g))
 #		print("{:.5} with $F$ criterion and of {:.5} with $FS$ criterion; KS test yields: {:.5},{:.5} and {:.5},{:.5}".format(d1,d2,ks1_s,ks1_p,ks2_s,ks2_p))
 
-	np.savetxt("alpha_{}/max/eucl_dist".format(a),d1)
-	np.savetxt("alpha_{}/asymp/eucl_dist".format(a),d2)
-	np.savetxt("alpha_{}/max/ks_dist".format(a),(ks1_s,ks1_p))
-	np.savetxt("alpha_{}/asymp/ks_dist".format(a),(ks2_s,ks2_p))
+
+		np.savetxt("alpha_{}/max/eucl_dist".format(a), d1)
+		np.savetxt("alpha_{}/asymp/eucl_dist".format(a),d2)
+		np.savetxt("alpha_{}/max/ks_dist".format(a), ks1)
+		np.savetxt("alpha_{}/asymp/ks_dist".format(a),ks2)
+		
 
 		#plt.plot(np.arange(0,l+1,1),np.sqrt((experim-ave_histoF)*(experim-ave_histoF)),color='steelblue',markersize=6,marker='o',linestyle='none',label='RMS error; F criterion')
 		#plt.plot(np.arange(0,l+1,1),np.sqrt((experim-ave_histoFS)*(experim-ave_histoFS)),color='green',markersize=6,marker='o',linestyle='none',label='RMS error; FS criterion')
