@@ -19,7 +19,7 @@ using namespace arma;
 //functions declarations
 void Read_input();
 Random random_initialization(int);
-uword cost_function(uword, uword, Random& rnd);
+uword compute_affinity(uword, Random& rnd);
 void total_fitness(Random&);
 void Selection(Random&,uword); //random generator
 void Lunch_time(Random&,uword,uword);

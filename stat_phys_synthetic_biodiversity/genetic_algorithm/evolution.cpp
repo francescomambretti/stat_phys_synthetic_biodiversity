@@ -2,12 +2,14 @@
 // Modified by Francesco Mambretti - 06/07/2021
 
 // Genetic algorithm. Simulates the evolution of a population of ssDNAs, which have to compete for a limited set of resources.
+// Now the histograms printed are cycles+1, numbered from 0 (i.e. before the first cycle) to cycles (i.e. after the last)
+// Important feature added: the alpha parameter, 0<= alpha <= 1, regulates the amount of random selection process, being 1-alpha the amount of driven selection (i.e. option=0 or option=2)
 
 // To run: // mpiexec -np $PROCS ./evolution input.dat $SEED 0
 
 // Currently, mutation is off by default
 
-// 14/08/2021 version
+// 06/09/2021 version
 
 #include "functions.h"
 #include "global.h"
@@ -49,7 +51,6 @@ int main (int argc, char *argv[]) {
     string b = "seed"+to_string(seed);
     chdir(b.c_str());
     cout << "cd "+b << endl;
-    //system("cp ../analysis.ipynb ../Primes ../seed.in ."); //copy essential files for the simulation
     system("cp ../Primes ../seed.in ."); //copy essential files for the simulation
     system("pwd");
 
@@ -97,16 +98,29 @@ int main (int argc, char *argv[]) {
     fstream out;
     cout << endl;
 
+    // added: print histogram before selection cycles
+    out.open("histogram"+to_string(it)+".dat",ios::out);
+    total_fitness(rnd); //compute the fitness of each individual
+    fitnesses.print(out);
+    out.close();
+    
     uword i = 0;
+    double r; // temporary random variable
+    
     for (it = 0; it<cycles; it++) {
         results.fill(-1);
-        out.open("histogram"+to_string(it)+".dat",ios::out);
+        out.open("histogram"+to_string(it+1)+".dat",ios::out);
         total_fitness(rnd); //compute the fitness of each individual
         for(i=0;i< N_res;i++) {
          #ifdef PRINT
             cout << "selection and lunch" << endl;
          #endif
-			Selection(rnd,option); //decide which predator to be selected at the i-th algorithm step
+            r=rnd.Rannyu();
+            if (r<=alpha) // perform purely random selection
+                Selection(rnd,1); //decide which predator to be selected at the i-th algorithm step
+            else // apply driven selection criterion, usually option!=1
+                Selection(rnd,option); //decide which predator to be selected at the i-th algorithm step
+            
 			Lunch_time(rnd,i,predator); //save data of the winners inside results matrix
 			if (i%iprint == 0 and rank==0)
                 cout << "genetic algoritm step: " << i << endl;

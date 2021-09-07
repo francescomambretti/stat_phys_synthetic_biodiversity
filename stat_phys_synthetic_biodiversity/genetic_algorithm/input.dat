@@ -1,11 +1,12 @@
 30
 50
 20
-100000000
-1000000
+50000
+5000
 4
 0.1
-2
+1
+0.5
 
   ReadInput >> cycles
   ReadInput >> predator length
@@ -15,3 +16,4 @@
   ReadInput >> nbases (2/4)
   ReadInput >> probability mutations
   ReadInput >> type of cost function
+  ReadInput >> alpha - fraction of purely random selection

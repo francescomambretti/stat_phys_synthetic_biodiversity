@@ -29,5 +29,8 @@ extern field<string> name;
 extern uvec fitnesses;
 extern Mat<int> results; // matrix with 2 columns (predator, max overlap) and N_res rows
 
+extern int asymp; //beyond this value, saturate cost function
+
+extern double alpha; // fraction of purely random selection moves
 
 #endif

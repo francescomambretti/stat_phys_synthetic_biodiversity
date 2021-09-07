@@ -1,9 +1,10 @@
-#FLAGS = -std=c++17 -DARMA_DONT_USE_WRAPPER -larmadillo -llapack -lblas -openmp -O3 -pg
+#FLAGS = -std=c++11 -DARMA_DONT_USE_WRAPPER -larmadillo -llapack -lblas -openmp -O3 -pg
 
-O_FLAGS= -std=c++17 -DARMA_DONT_USE_WRAPPER -I/${ARMA_INC} -O3  -openmp
-L_FLAGS= -std=c++17 -DARMA_DONT_USE_WRAPPER -L/${ARMA_LIB} -O3 -llapack -lblas  -openmp
+O_FLAGS= -std=c++11 -DARMA_DONT_USE_WRAPPER -I/${ARMA_INC} -O3  -openmp
+L_FLAGS= -std=c++11 -DARMA_DONT_USE_WRAPPER -L/${ARMA_LIB} -O3 -llapack -lblas  -openmp
 
-COMPILER = /opt/homebrew/Cellar/mpich/3.4.2/bin/mpic++
+COMPILER = /opt/homebrew/Cellar/open-mpi/4.1.1_2/bin/mpic++
+#/opt/homebrew/Cellar/mpich/3.4.2/bin/mpic++
 
 evolution: evolution.o functions.o random.o
 	$(COMPILER) $(L_FLAGS) evolution.o functions.o random.o -o evolution

@@ -29,6 +29,10 @@ field<string> name;
 uvec fitnesses;
 Mat<int> results; // matrix with 2 columns (predator, max overlap) and  N_res rows
 
+int asymp=12; // beyond this value, saturate the cost function
+
+double alpha;
+
 //=================================================================================================================
 
 // FUNCTIONS
@@ -58,6 +62,7 @@ Random random_initialization(int rank_index) {
             input >> property;
             if( property == "RANDOMSEED" ){
                 input >> seed[0] >> seed[1] >> seed[2] >> seed[3];
+                //cout << seed[0] << '\t' << seed[1] << '\t' << seed[2] << '\t' << seed[3];
                 rnd.SetRandom(seed,p1,p2);
             }
         }
@@ -84,20 +89,18 @@ void Read_input() {
     ReadInput >> N_res; // resources population size
 	ReadInput >> nbases; // use 0,1 or 0,1,2,3
     ReadInput >> p_m; // mutation probability (ignored if mutations are turned off)
-    ReadInput >> option; //which type of cost function to use
+    ReadInput >> option; // which type of cost function to use
+    ReadInput >> alpha; // fraction of purely random selection
 
     ReadInput.close();
 }
 
 //==========================
-// cost_function
+// compute_affinity
 //==========================
 
-uword cost_function(uword i, uword option, Random& rnd) { //compute the value of the cost function between the target strand and the i-th predator
-    
-    int asymp=12; // beyond this value, saturate the cost function
+uword compute_affinity(uword i, Random& rnd) { //compute the value of the max consecutive overlap between the target strand and the i-th predator
 
-    //if (option==0 or option==1 or option==2){ //use the largest maximum consecutive overlap as metrics - commented because this calculation must be done regardless of the chosen option
     uword Max = 0; //it will be Max overlaps
     uword overlap; //counter for overlap
     
@@ -127,20 +130,11 @@ uword cost_function(uword i, uword option, Random& rnd) { //compute the value of
         
         if (overlap>Max)
             Max = overlap; //update max
-    }//end for j
+        
+    } //end for j
     
-    if (option==0 or option==1)
-        return Max;
-    else if (option==2){
-        if (Max<asymp)
-            return Max;
-        else
-            return asymp;
-    }
-        
-    //}//end if option==0 or ==1 or ==2
-        
-} //end cost_function
+    return Max;
+} //end compute_affinity
 
 //==========================
 // total_fitness
@@ -149,7 +143,7 @@ uword cost_function(uword i, uword option, Random& rnd) { //compute the value of
 void total_fitness(Random& rnd) {
 
     for (uword i=0;i<N_pred;i++)
-        fitnesses(i) = cost_function(i, option, rnd);
+        fitnesses(i) = compute_affinity(i, rnd);
 
     #ifdef PRINT
     cout << "fitnesses: " << endl;
@@ -157,7 +151,7 @@ void total_fitness(Random& rnd) {
     #endif
 
     uvec q = find(fitnesses > 0);
-    //q.print();
+
     if (q.size() == 0) {
         cout << "the population has not enough members" << endl;
         exit(EXIT_FAILURE);
@@ -176,18 +170,18 @@ void total_fitness(Random& rnd) {
 // Selection
 //==========================
 
-void Selection(Random& rnd,uword option) {
+void Selection(Random& rnd, uword option) {
 
-    double x;
-    if (option==0 or option==2){
+    double x, cost;
+    
+    if (option==0){
         for(;;) {
-            predator = int(rnd.Rannyu(0,N_pred));
+            predator = int(rnd.Rannyu(0, N_pred));
             x = rnd.Rannyu();
-        //cout << "predator: "  << predator  << "random number x: " << x << " and fitness " << double(fitnesses(predator))/double(Tot_Fit) << endl;
             if ( ( x <= double(fitnesses(predator))/double(l) ) && ( all(results.col(0) != predator) ) )
                 break;
         }
-    }
+    } // use maximum consecutive overlap as fitness
     
     else if (option==1){ //random uniform choice, regardless of fitness
         for(;;) {
@@ -196,6 +190,20 @@ void Selection(Random& rnd,uword option) {
                 break;
         }
     }
+    
+    else if (option==2){
+        for(;;) {
+            predator = int(rnd.Rannyu(0,N_pred));
+            if (fitnesses(predator)>asymp)
+                cost=asymp;
+            else
+                cost=fitnesses(predator);
+            
+            x = rnd.Rannyu();
+            if ( ( x <= cost/double(l) ) && ( all(results.col(0) != predator) ) )
+                break;
+        }
+    } // use maximum consecutive overlap with saturation as fitness
 
     #ifdef PRINT
     cout << " the winning sequence is " << predator << endl;

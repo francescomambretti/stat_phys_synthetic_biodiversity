@@ -12,10 +12,10 @@ gens=30 #generations of Genetic Algorithm
 l=20  #maximum allowed overlap
 max_seed=10 #number of independent runs
 
-colorlist=('firebrick','orangered','gold','lime','green','steelblue')
+colorlist=('firebrick','orangered','gold','lime','green','steelblue','gray')
 
 ### average data over the various seeds
-for g in range (0,gens,5):
+for g in range (0,gens+1,5):
 	ave_histo=np.zeros(l+1)
 	ave_histo2=np.zeros(l+1)
 	for s in range(1,max_seed,1):
@@ -32,9 +32,12 @@ for g in range (0,gens,5):
 	
 	plt.bar(np.arange(0,l+1,1),ave_histo,label='gen. {}'.format(g),alpha=1.0,align='center',color=colorlist[int(g/5)],yerr=error,capsize=4,edgecolor='black',ecolor=colorlist[int(g/5)])
 
-	#plt.yscale('log')
-	plt.xlabel("Maximum consecutive overlap - species index",fontsize=12)
-	plt.xticks(np.arange(0,l+2,4),fontsize=13)
-	plt.yticks(fontsize=13)
-	plt.legend(fontsize=13)
-plt.savefig('ave_histo_RSA.png',dpi=300)
+plt.xlabel("Maximum consecutive overlap - species index",fontsize=12)
+plt.xticks(np.arange(0,l+2,4),fontsize=13)
+plt.yticks(fontsize=13)
+plt.legend(fontsize=13)
+plt.title("$FS$ criterion - $N_{res}=1E4$")
+plt.savefig('ave_histo_RSA_FS_1E4_1E6.png',dpi=300)
+
+plt.yscale('log')
+plt.savefig('ave_histo_RSA_FS_1E4_1E6_log.png',dpi=300)
