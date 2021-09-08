@@ -31,7 +31,7 @@ for alpha in np.arange (0,1.25,0.25): #loop over alpha
 	ave_histo2/=max_seed
 	error=np.sqrt((ave_histo2-ave_histo*ave_histo)/max_seed)
 	
-	plt.bar(np.arange(0,l+1,1),ave_histo,label='$\alpha=$ {}'.format(alpha),alpha=1.0,align='center',color=colorlist[int(alpha*4)],yerr=error,capsize=4,edgecolor='black',ecolor=colorlist[int(alpha*4)])
+	plt.bar(np.arange(0,l+1,1),ave_histo,label='$\\alpha=$ {}'.format(alpha),alpha=1.0,align='center',color=colorlist[int(alpha*4)],yerr=error,capsize=4,edgecolor='black',ecolor=colorlist[int(alpha*4)])
 
 plt.xlabel("Maximum consecutive overlap - species index",fontsize=12)
 plt.xticks(np.arange(0,l+2,4),fontsize=13)
