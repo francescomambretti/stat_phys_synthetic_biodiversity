@@ -2,12 +2,15 @@
 ## 04/09/2021
 ## Plot the RMS distance between the outcome of each cycle for the RSA histogram and the experimental data (at a given cycle)
 ## KS test added
-## 07/09/2021 version
+## 29/09/2021 version
+
+## Update 28/09/2021: compute KL divergence (to be plotted)
+## and also compute the Shannon entropy associated to each GA cycle
 
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from scipy.stats import kstest, ks_2samp
+from scipy.stats import kstest, ks_2samp, entropy
 
 #### define variables ####
 
@@ -30,15 +33,19 @@ for a in alpha_list:
 	d2=np.zeros(0)
 	ks1=np.zeros((0,2))
 	ks2=np.zeros((0,2))
-	for g in range (0,gens+1,1):  # modify according to the need
-	#	print(g)
+	kldiv1=np.zeros((0,2))
+	kldiv2=np.zeros((0,2))
+	entropy1=np.zeros((0,2))
+	entropy2=np.zeros((0,2))
+	for g in range (1,gens+1,1):  # modify according to the need
+#		print(g)
 		ave_histoF=np.zeros(l+1)
 		ave_histo2F=np.zeros(l+1)
 		ave_histoFS=np.zeros(l+1)
 		ave_histo2FS=np.zeros(l+1)
 		#ave_histoR=np.zeros(l+1)
 		#ave_histo2R=np.zeros(l+1)
-		for s in range(1,max_seed,1):
+		for s in range(1,max_seed+1,1):
 			data=np.loadtxt("alpha_{}/max/seed{}/histogram{}.dat".format(a,s,g),unpack=True)
 			weights = np.ones_like(data)/len(data)
 			histo,binEdges=np.histogram(data,bins=np.arange(0,l+2,1),weights=weights)
@@ -80,15 +87,23 @@ for a in alpha_list:
 		ks1=np.vstack((ks1,[ks1_s,ks1_p]))
 		ks1=np.vstack((ks2,[ks2_s,ks2_p]))
 
+		kldiv1=np.append(kldiv1,entropy(ave_histoF,experim,base=2))
+		kldiv2=np.append(kldiv2,entropy(ave_histoFS,experim,base=2))
+
+		entropy1=np.append(entropy1,entropy(ave_histoF,base=2))
+		entropy2=np.append(entropy2,entropy(ave_histoFS,base=2))
+
 #		print("For alpha={}, cycle {} yields an euclidean distance of the RSA histogram equal to:".format(a,g))
 #		print("{:.5} with $F$ criterion and of {:.5} with $FS$ criterion; KS test yields: {:.5},{:.5} and {:.5},{:.5}".format(d1,d2,ks1_s,ks1_p,ks2_s,ks2_p))
-
 
 		np.savetxt("alpha_{}/max/eucl_dist".format(a), d1)
 		np.savetxt("alpha_{}/asymp/eucl_dist".format(a),d2)
 		np.savetxt("alpha_{}/max/ks_dist".format(a), ks1)
 		np.savetxt("alpha_{}/asymp/ks_dist".format(a),ks2)
-		
+		np.savetxt("alpha_{}/max/kl_div".format(a), kldiv1)
+		np.savetxt("alpha_{}/asymp/kl_div".format(a), kldiv2)	
+		np.savetxt("alpha_{}/max/entropy".format(a), entropy1)
+		np.savetxt("alpha_{}/asymp/entropy".format(a), entropy2)	
 
 		#plt.plot(np.arange(0,l+1,1),np.sqrt((experim-ave_histoF)*(experim-ave_histoF)),color='steelblue',markersize=6,marker='o',linestyle='none',label='RMS error; F criterion')
 		#plt.plot(np.arange(0,l+1,1),np.sqrt((experim-ave_histoFS)*(experim-ave_histoFS)),color='green',markersize=6,marker='o',linestyle='none',label='RMS error; FS criterion')
