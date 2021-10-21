@@ -2,7 +2,7 @@
 ###
 ### Counts the total HB and the MCO between 2 strands: either 1 predator + 1 resource, or 1+1 predators or 1+1 resources as a function of time
 
-### 20/10/2021 version
+### 21/10/2021 version
 
 import numpy as np
 import sys
@@ -51,31 +51,7 @@ with open(sys.argv[1],"r") as f:
         #print("line: ", count_line)
         #print(line,line[0],tot)
 
-        if(line[0]!="#" and line[0]!="\n"): #equivalently, elif (line[0]!="\n" and line[0]!="#"):
-            p = int(line.split()[0]),int(line.split()[1])
-            if (p[0]<=watershed and p[1]>watershed): #p[0] always < p[1]
-                tot+=1
-                if (prec_p==-1 and prec_r==-1):
-                    temp_mco=1 # we have a pair of matching bases!
-                    mco=1
-                    prec_p=p[0] #save indexes for next loop
-                    prec_r=p[1]
-
-                elif (prec_p!=-1 and prec_r!=-1): #they are initialized to some nucleotide index
-                    if (np.abs(p[0]-prec_p)==1 and np.abs(prec_r-p[1])==1):  #N.B.: this works only if hb_list.dat's second column is ordered in ascending order and the first one is not, otherwise one needs to use np.abs
-                       temp_mco+=1
-
-                    else: 
-                        # equivalently - if (np.abs(p[0]-prec_p)>1 or np.abs(prec_r-p[1])>1): #there is a gap, a non-consecutive HB or similar
-                        #beginning of a new set of possibly overlapping bases, preceded by other non-consecutive overlapping bases
-                        if (temp_mco>mco):
-                            mco=temp_mco
-                        temp_mco=1
-
-                prec_p=p[0]
-                prec_r=p[1]
-                
-        elif (line[0]=="#"): # a new step starts
+        if (line[0]=="#"): # a new step starts
             step+=1
             tot=0
             mco=0
@@ -90,5 +66,31 @@ with open(sys.argv[1],"r") as f:
             f = open(output_file_name, "a")
             f.write(str(step)+' '+str(tot)+' '+str(mco)+'\n')
             f.close()
+            
+        elif(line[0]!="#" and line[0]!="\n"): #equivalently, elif (line[0]!="\n" and line[0]!="#"):
+            p = int(line.split()[0]),int(line.split()[1])
+            if (p[0]<=watershed and p[1]>watershed): #p[0] always < p[1]
+                tot+=1
+                if (prec_p==-1 and prec_r==-1):
+                    temp_mco=1 # we have a pair of matching bases!
+                    mco=1
+                    prec_p=p[0] #save indexes for next loop
+                    prec_r=p[1]
+
+                elif (prec_p!=-1 and prec_r!=-1): #they are initialized to some nucleotide index
+                    if (np.abs(p[0]-prec_p)==1 and np.abs(prec_r-p[1])==1):  #N.B.: this works only if hb_list.dat's second column is ordered in ascending order and the first one is not, otherwise one needs to use np.abs
+                       temp_mco+=1
+
+                    else:
+                        # equivalently - if (np.abs(p[0]-prec_p)>1 or np.abs(prec_r-p[1])>1): #there is a gap, a non-consecutive HB or similar
+                        #beginning of a new set of possibly overlapping bases, preceded by other non-consecutive overlapping bases
+                        if (temp_mco>mco):
+                            mco=temp_mco
+                        temp_mco=1
+
+                prec_p=p[0]
+                prec_r=p[1]
+                
+
 
         count_line = count_line+1    
