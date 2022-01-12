@@ -19,6 +19,7 @@ Note: `mixed_hb_pair.py` is not used anymore.
 ******************************
 
 `mixed_hb_pair_evo.py` counts the total number of mixed hydrogen bonds (HB) and the MCO between an arbitrary group of strands (how many predators and how many resources you like) as a function of time, in all the simulations of a given set of simulations. Also self interactions are considered.
+Useful functions are implemented in `functions_mixed_hb.py`, and input parameters must be set in `input_params.py`.
 
 To be used like: `python mixed_hb_pair_evo.py`, where all the input parameters are stored in a file like the one provided (`input_params.py`).
 The program outputs a file called `output_file_name` (set into `input_params.py`) with the computed quantities.
