@@ -1,0 +1,43 @@
+#********Input_min:********
+
+## general input ###############
+        backend = CPU	
+	steps = 5000
+	fix_diffusion = 0
+	back_in_box = 0
+
+## simulation option #############
+	sim_type = min
+	dt = 0.005
+	verlet_skin = 0.3
+	T = 40C
+	interaction_type = DNA2
+	salt_concentration = 0.24
+	max_backbone_force = 5.
+	use_average_seq = no
+	seq_dep_file = oxDNA1_sequence_dependent_parameters.txt
+###########################################
+
+	topology = top.top
+########## questi sono importanti ######################
+	conf_file = start.conf
+	lastconf_file = stage1.dat
+############## è da dove parte la simulazione successiva #####
+
+	trajectory_file = trajectory_min.dat
+	print_conf_interval = 5000
+
+	log_file= min.output
+
+###### energy file #######################
+	energy_file = energy_min.dat
+	print_energy_every = 5000
+	no_stdout_energy = true
+	time_scale = linear
+	restart_step_counter = 1
+	refresh_vel = 1
+
+####### Forces ####################
+	external_forces = 1
+	external_forces_file = forces.txt
+
