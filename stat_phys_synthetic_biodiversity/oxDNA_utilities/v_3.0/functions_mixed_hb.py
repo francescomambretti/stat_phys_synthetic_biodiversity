@@ -31,7 +31,7 @@ def set_watershed(n_pred,n_res,l,L):
 ##############################################################
 
 def belongs_to(index, s_low, s_top): #check whether a nucleotide belongs to a strand
-    if ( index >= s_low and index < s_top):
+    if ( index >= s_low and index <= s_top):
         return True
     else:
         return False
@@ -50,7 +50,7 @@ def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether 
     elif (i in res_indexes): #it is a resource
         # pred_offset has already a different value depending on caps_l
         low_i=pred_offset+1+(int(i/3)-n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
-        top_i=low_i+l
+        top_i=low_i+l-1
     
     else: #it is a blocking cap
         if ((i-1) in pred_indexes):
