@@ -19,3 +19,7 @@ The code is described at the beginning of the .cpp file
 -------------------------------------
 
 `compare.py`: 2D histogram of maximum and total consecutive overlaps
+
+-------------------------------------
+
+`family_search.py`: tracks the abundance of strands containing (or not) a given subsequence along the experimental cycles
