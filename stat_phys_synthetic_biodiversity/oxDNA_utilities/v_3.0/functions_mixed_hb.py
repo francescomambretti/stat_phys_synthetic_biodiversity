@@ -49,7 +49,10 @@ def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether 
     
     elif (i in res_indexes): #it is a resource
         # pred_offset has already a different value depending on caps_l
-        low_i=pred_offset+1+(int(i/3)-n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
+        if (caps_per_pred!=0):
+            low_i=pred_offset+1+(int(i/3)-n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
+        else:
+            low_i=pred_offset+1+(i-n_pred)*l
         top_i=low_i+l-1
     
     else: #it is a blocking cap
