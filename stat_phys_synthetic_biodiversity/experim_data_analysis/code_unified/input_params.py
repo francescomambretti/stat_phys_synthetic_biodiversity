@@ -1,5 +1,5 @@
 # set input options
-# 14/02/2022 version
+# 16/02/2022 version
 
 import numpy as np
 
@@ -134,15 +134,27 @@ elif key1=="oligo2":
         cycles_IDs=np.arange(0,19,3)
         
 elif key1=="negative":
+        
+    target="CGTATCACCAGGCAGTTGAG"
     mother_folder="../data/negative/" # where to take FASTQ files from
-    results_folder=results_folder+"negative/"+key2+"_"+key3+"/min_Q_{}/".format(min_Q) # where to store results
+    
+    if (key_filter==False and key_no_cut==False):
+        results_folder=results_folder+"negative/"+key2+"_"+key3+"/min_Q_{}/".format(min_Q) # where to store results
+    elif (key_filter==True and key_no_cut==False):
+        results_folder=results_folder+"negative/"+key2+"_"+key3+"_key_filter/min_Q_{}/".format(min_Q) # where to store results
+    elif (key_filter==True and key_no_cut==True):
+        results_folder=results_folder+"negative/"+key2+"_"+key3+"_key_filter_key_no_cut/min_Q_{}/".format(min_Q) # where to store results
+    elif (key_filter==False and key_no_cut==True):
+        results_folder=results_folder+"negative/"+key2+"_"+key3+"_key_no_cut/min_Q_{}/".format(min_Q) # where to store results
+        
     if key2=="R1" or key2=="R2":
         fastq_file_list=("R3_negative_"+key2,"R6_negative_"+key2)
         fastq_file_list_plot=("0_R3_negative_"+key2,"1_R6_negative_"+key2)
         cycles_IDs=(3,6)
 
     elif key2=="R1R2":
-        fastq_file_list=("R3_negative_R1R2","R6_negative_R1R2")
+        fastq_file_list_R1=("R3_negative_R1","R6_negative_R1")
+        fastq_file_list_R2=("R3_negative_R2","R6_negative_R2")
         fastq_file_list_plot=("0_R3_negative_R1R2","1_R6_negative_R1R2")
     
 #################################### primers - fixed sequences - dir 5' --> 3' ####################################
