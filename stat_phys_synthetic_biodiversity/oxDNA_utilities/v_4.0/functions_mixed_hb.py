@@ -2,7 +2,7 @@
 ###
 ### Useful tools for mixed_hb_pair_evo.py code
 
-### 17/03/2022 version
+### 18/03/2022 version
 
 import numpy as np
 import sys
@@ -39,22 +39,22 @@ def belongs_to(index, s_low, s_top): #check whether a nucleotide belongs to a st
 ##############################################################
 
 def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether a strand is a predator/cap/resource and set the indexes of its boundary nucleotides
+
     if (i in pred_indexes): #it is a predator
         if (caps_per_pred!=0):
-            low_i=i*(L+caps_l*2) #index of the first nucleotide of i
-            top_i=low_i+L-1
+            low_i=int(i/3)*(L+caps_l*2) #index of the first nucleotide of predator i - jth element of pred_indexes_list
         else:
             low_i=i*L
-            top_i=(i+1)*L-1
+        top_i=low_i+L-1
     
     elif (i in res_indexes): #it is a resource
-        # pred_offset has already a different value depending on caps_l
         if (caps_per_pred!=0):
-            low_i=pred_offset+1+(int(i/3)-n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
+        # pred_offset has already a different value depending on caps_l
+            low_i=pred_offset+1+(i-3*n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
         else:
-            low_i=pred_offset+1+(i-n_pred)*l 
+            low_i=pred_offset+1+(i-n_pred)*l
         top_i=low_i+l-1
-    
+
     else: #it is a blocking cap
         if ((i-1) in pred_indexes):
             low_i= (L+2*caps_l)*int(i/3)+L  #number of complete p+t1+t2 + another L bases for the current predator
@@ -66,7 +66,7 @@ def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether 
         else: #the blocking cap is neither the left nor the right one, which is not possible!
             print("Error with blocking caps!")
             sys.exit(-1)
-            
+
     return low_i, top_i
 
 ##############################################################
@@ -84,27 +84,26 @@ def read_and_process (mother_file,output_folder,output_file_name,n_pred,n_res,i,
     #build list of predator indexes
     if (caps_per_pred!=0):
         pred_indexes=np.arange(0,n_pred*3,3) #3 <--> 2 blocking caps + 1 pred
-        res_indexes=np.arange(n_pred*3,tmo_strands,1)
+        res_indexes=np.arange(n_pred*3,tot_strands,1)
         pred_offset=(L+2*caps_l)*n_pred-1 #index of the last nucleotide belonging to the predator with the highest strand index - here, L also includes fixed sequences!
     else: # we are not using caps and fixed sequences
         pred_indexes=np.arange(0,n_pred,1)
         res_indexes=np.arange(n_pred,tot_strands,1)
         pred_offset=L*n_pred-1
-       
+
     # I am comparing strands i and j
     low_i, top_i=compute_low_top(i,pred_indexes,res_indexes,pred_offset)
     #repeat the same check with j
     low_j, top_j=compute_low_top(j,pred_indexes,res_indexes,pred_offset)
-
     with open(mother_file,"r") as f: #read file with the full hb list
         for line in f:
             #if (count_line%CTRL==0): #uncomment to know that it is doing something
             #print("line: ", count_line)
-            #print(line,line[0],tmo)
+            #print(line,line[0],tot)
             
             if (line[0]=="#"): # a new step starts
                 step+=1
-                tmo=0
+                tot=0
                 mco=0
                 temp_mco=0
                 prec_p=-1
@@ -115,7 +114,7 @@ def read_and_process (mother_file,output_folder,output_file_name,n_pred,n_res,i,
                     mco=temp_mco
                 #the timestep is over, print file
                 f = open(output_folder+"/"+str(i)+"_"+str(j)+"_"+output_file_name, "a")
-                f.write(str(step)+' '+str(tmo)+' '+str(mco)+'\n')
+                f.write(str(step)+' '+str(tot)+' '+str(mco)+'\n')
                 f.close()
 
             else: #equivalently, elif (line[0]!="\n" and line[0]!="#"):
@@ -123,7 +122,7 @@ def read_and_process (mother_file,output_folder,output_file_name,n_pred,n_res,i,
                 #print(p[0],p[1],low_i,top_i,low_j,top_j,i,j,belongs_to(p[1], low_j, top_j))
                 
                 if ( (belongs_to(p[0], low_i, top_i) and belongs_to(p[1], low_j, top_j)) or ( ( belongs_to(p[1], low_i, top_i) and belongs_to(p[0], low_j, top_j)) ) ): # I am currently not interested in the self-interactions of a strand with itself ; moreover, p[0] always < p[1] so the second condition after "or" should never be met
-                    tmo+=1
+                    tot+=1
                     if (prec_p==-1 and prec_r==-1):
                         temp_mco=1 # we have a pair of matching bases!
                         mco=1
@@ -153,33 +152,33 @@ def Error (a,a_2,norm):
 
 ######################################################
 
-def accumulate(ave_tmo_hb,ave_mco_hb,appo_tmo_hb,appo_mco_hb,ave_tmo_hb_2,ave_mco_hb_2):
-    ave_tmo_hb+=appo_tmo_hb
+def accumulate(ave_tot_hb,ave_mco_hb,appo_tot_hb,appo_mco_hb,ave_tot_hb_2,ave_mco_hb_2):
+    ave_tot_hb+=appo_tot_hb
     ave_mco_hb+=appo_mco_hb
-    ave_tmo_hb_2+=appo_tmo_hb*appo_tmo_hb
+    ave_tot_hb_2+=appo_tot_hb*appo_tot_hb
     ave_mco_hb_2+=appo_mco_hb*appo_mco_hb
     
     return
 
 ######################################################
 
-def initialize(ave_tmo_hb,ave_mco_hb,appo_tmo_hb,appo_mco_hb):
-    ave_tmo_hb=appo_tmo_hb
+def initialize(ave_tot_hb,ave_mco_hb,appo_tot_hb,appo_mco_hb):
+    ave_tot_hb=appo_tot_hb
     ave_mco_hb=appo_mco_hb
-    ave_tmo_hb_2=appo_tmo_hb*appo_tmo_hb
+    ave_tot_hb_2=appo_tot_hb*appo_tot_hb
     ave_mco_hb_2=appo_mco_hb*appo_mco_hb
     
-    return ave_tmo_hb, ave_mco_hb, ave_tmo_hb_2, ave_mco_hb_2
+    return ave_tot_hb, ave_mco_hb, ave_tot_hb_2, ave_mco_hb_2
 
 ######################################################
 
-def reset(ave_tmo_hb,ave_mco_hb,all_tmo_hb,all_mco_hb,ave_tmo_hb_2,ave_mco_hb_2):
-    ave_tmo_hb=np.zeros(0)
+def reset(ave_tot_hb,ave_mco_hb,all_tot_hb,all_mco_hb,ave_tot_hb_2,ave_mco_hb_2):
+    ave_tot_hb=np.zeros(0)
     ave_mco_hb=np.zeros(0)
-    all_tmo_hb=np.zeros(0)
+    all_tot_hb=np.zeros(0)
     all_mco_hb=np.zeros(0)
-    ave_tmo_hb_2=np.zeros(0)
+    ave_tot_hb_2=np.zeros(0)
     ave_mco_hb_2=np.zeros(0)
     
-    return ave_tmo_hb,ave_mco_hb,all_tmo_hb,all_mco_hb,ave_tmo_hb_2,ave_mco_hb_2
+    return ave_tot_hb,ave_mco_hb,all_tot_hb,all_mco_hb,ave_tot_hb_2,ave_mco_hb_2
 

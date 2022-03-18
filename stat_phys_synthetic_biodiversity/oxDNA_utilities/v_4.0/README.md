@@ -29,7 +29,8 @@ The code also generates the plots of:
 - the histograms of Maximum Consecutive Overlap and Total Mixed Overlap between any pair of strands in the system
 - the average over _n_ independent simulations of the MCO and TMO as a function of time, with errorbars
 
-From this version, the code is also capable of working with caps and fixed sequences at the ends of the predator.
+From version 3.0, the code is also capable of working with caps and fixed sequences at the ends of the predator.
+From this version (4.0), the code manages an arbitrary number of predators with/without caps (the two conditions can not be merged, at the moment) and an arbitrary number of resources.
 
 ******************************
 
