@@ -422,18 +422,19 @@ def top_n_full_evo (*args,n,results_folder,param,tot_valid):
                     
 def cross_MCOs_top_n(my_df, fastq_file, full_folder): #call method for cross-MCOs matrix
         
-    cross_MCOs = np.zeros((n,n))
+    cross_MCOs = np.zeros((n+1,n))
     
     #my_df contains the info about the top-n strands of that cycle
     for i1, row1 in my_df.iterrows(): #loop over my_df rows - i.e. select one of the top winners of that cycle, in decreasing abundance order
+        cross_MCOs[0][i1]=row1['MCO']
         for i2, row2 in my_df[i1+1:n].iterrows():
             #compute MCO between them
             seq1=row1['strand']
             seq2=rev_and_compl(row2['strand'])
             MCO_pair=SequenceMatcher(None, seq1, seq2).find_longest_match(0, len(seq1), 0, len(seq2)).size
-            cross_MCOs[i1][i2]=MCO_pair
-            cross_MCOs[i2][i1]=MCO_pair
-        
+            cross_MCOs[i1+1][i2]=MCO_pair
+            cross_MCOs[i2+1][i1]=MCO_pair
+            
     #save results
     np.savetxt(full_folder+"/cross_MCOs.txt",cross_MCOs,fmt="%d")
 

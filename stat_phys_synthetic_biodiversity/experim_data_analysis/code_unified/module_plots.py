@@ -327,16 +327,18 @@ def plot_unique_sequences(file,pngfile):
 
 def plot_cross_MCOs(file,pngfile,cycle):
 
-    cross_MCOs=np.loadtxt(file,unpack=True,)
+    labels=np.loadtxt(file,unpack=True,max_rows=1,dtype=int)
+    cross_MCOs=np.loadtxt(file,unpack=True,skiprows=1)
     
     plt.clf()
     cax = plt.imshow(cross_MCOs,cmap='viridis')
     plt.title("Cycle {}".format(cycle),fontsize=14)
-    plt.ylabel("MCO",fontsize=14)
+    plt.xlabel("$\omega$",fontsize=14)
+    plt.ylabel("$\omega$",fontsize=14)
     cbar = plt.colorbar(cax, ticks=[0,5,10,15])
     plt.clim(0,15)
-    plt.xticks(np.arange(0,n,1),labels=np.arange(1,n+1,1))
-    plt.yticks(np.arange(0,n,1),labels=np.arange(1,n+1,1))
+    plt.xticks(np.arange(0,n,1),labels=labels)
+    plt.yticks(np.arange(0,n,1),labels=labels)
     plt.savefig(pngfile,dpi=300)
     plt.close()
     
