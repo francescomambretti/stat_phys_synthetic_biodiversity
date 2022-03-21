@@ -1,37 +1,39 @@
 # set input options
-# 16/02/2022 version
+# 21/03/2022 version
 
 import numpy as np
 
 #################################### general options, keys to be set ####################################
 
 key1="oligo1" #"oligo1", "oligo2", "negative" or "seriesN" - "$KEY1$"
-key2="R2" # "R1", "R2", "R1R2" - "$KEY2$"
-key3="rev" # "fw", "rev" or "all" - "$KEY3$"
-key_filter=False #if True, call a dedicated function inside module_functions to apply further filtering on data - $KEY_FILTER$
+key2="R1" # "R1", "R2", "R1R2" - "$KEY2$"
+key3="all" # "fw", "rev" or "all" - "$KEY3$"
+key_filter=True #if True, call a dedicated function inside module_functions to apply further filtering on data - $KEY_FILTER$
 key_no_cut=False #if True, do not remove primer sequences when printing sequences - $KEY_NO_CUT$
 
 #################################### plots options, to be set ####################################
 ### parameters for plots
 keywords=("all", "fw", "rev") #some of them can be commented
-colornames=("limegreen","lightskyblue","sandybrown") #comment here accordingly - colors for RSA histograms, all,fw,rev
+colornames=("limegreen","lightskyblue","sandybrown") #comment here accordingly - colors for omega histograms, all,fw,rev
 
-create_png_abund=False # create png files for abundance of strands inside MCO folders
+create_png_abund=True # create png files for abundance of strands inside MCO folders
 
 #################################### analysis parameters ####################################
 
 min_Q=10 #lowest phred quality accepted
 l=20 #resource length
-subset_steps=1e4 # analyze only the first subset_steps
+subset_steps=1e3 # analyze only the first subset_steps
 use_stop=True # decide whether to really do it
-n=10 #top-n strands
+n=10#10 #top-n strands
 
 # info about strands
 random_seq=50 #50 random nucleotides, by default
 cap_size=25
 extra_end=1
-L=random_seq+cap_size+extra_end #max, with cap and last one - length of predators
-lower_bound=L-6
+L=175#random_seq+cap_size+extra_end #max, with cap and last one - length of predators
+lower_bound=0#L-6
+
+alien_bases=8 #number of bases for the MCO analysis about alien sequences
 
 #################################### variables set inside if conditions ####################################
 
@@ -41,7 +43,7 @@ fastq_file_list_R1=()
 fastq_file_list_R2=()
 cycles_IDs=np.empty(0)
 mother_folder=""
-results_folder="../results/"
+results_folder="../test_1e3new/"
 fw_primer=""
 fw_full_fixed_seq=""
 rev_primer=""
@@ -159,7 +161,7 @@ elif key1=="negative":
     
 #################################### primers - fixed sequences - dir 5' --> 3' ####################################
 # oligo 1
-if key1=="oligo1" or key13=="seriesN":
+if key1=="oligo1" or key1=="seriesN":
     if (key2=="R1"):
         fw_primer="GGATGGGAGTGCTCTTCTTG"
         fw_full_fixed_seq="GGATGGGAGTGCTCTTCTTGAACTC" # not really used
@@ -206,4 +208,3 @@ if key2=="R1":
     skip_bases=0
 else: #set to 3 in case of R2 and R1R2 analysis - skip the first 3 bases of each line
     skip_bases=3
-

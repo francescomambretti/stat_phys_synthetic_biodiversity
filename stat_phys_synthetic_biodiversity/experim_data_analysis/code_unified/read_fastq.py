@@ -8,7 +8,7 @@
 # 0) extracts the strand sequence from FASTQ files
 # 1) computes the distribution of the strands length
 # 2) computes MCO and MCO_2nd for each strand
-# 3) computes the RSA histogram, where a species is defined according to its max(MCO)=\omega & compute their Shannon entropy
+# 3) computes the histogram of the strands omega, where max(MCO)=omega, & compute their Shannon entropy
 # 4) create a separate folder for each MCO where to save MCO-specific results
 # 5) detect abundance of unique strands
 # 6) track the evolution of most abundant strands at each cycle
@@ -16,7 +16,7 @@
 #
 # Sequences which are not recognized either as forward or as reverse, are not analyzed and counted as non valid ones.
 #
-# 09/02/2022 version
+# 21/03/2022 version
 
 ##### import #####
 import numpy as np
@@ -56,8 +56,8 @@ if (key2=="R1" or key2=="R2"):
         func.sort_unique_strands(specific_results)
 
     print(unique_time_series/tot_valid)
-    
-    func.top_n_full_evo (fastq_file_list,n=n,results_folder=results_folder,param=-1,tot_valid=tot_valid) #overall
+    np.savetxt(results_folder+"/tot_valid.txt",np.column_stack((unique_time_series/tot_valid,tot_valid)),header="Unique sequences "+'\t'+" tot valid")
+    func.top_n_full_evo(fastq_file_list,n=n,results_folder=results_folder,param=-1,tot_valid=tot_valid) #overall
 
 elif (key2=="R1R2"):
     tot_valid=np.zeros(len(fastq_file_list_R1))
@@ -73,6 +73,7 @@ elif (key2=="R1R2"):
     
     #print percentages of unique strands as a function of time
     print(unique_time_series/tot_valid)
+    np.savetxt(results_folder+"/tot_valid.txt",np.column_stack((unique_time_series/tot_valid,tot_valid)),header="Unique sequences "+'\t'+" tot valid", fmt="%.3f")
 
     func.top_n_full_evo (fastq_file_list_R1,fastq_file_list_R2,n=n,results_folder=results_folder,param=-1,tot_valid=tot_valid) #overall
     #for temp_mco in np.arange(0,l+1): #for each MCO - uncomment iff really needed

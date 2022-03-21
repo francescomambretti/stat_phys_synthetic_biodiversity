@@ -1,6 +1,6 @@
 # Written by Francesco Mambretti, 01/02/2022
 # custom module with functions used during experimental FASTQ files analysis
-# 10/02/2022 version
+# 21/03/2022 version
 
 import numpy as np
 import os
@@ -12,13 +12,15 @@ import module_plots as mod_pl
 import sys
 import pandas as pd
 from input_params import *
+import subprocess
+from difflib import SequenceMatcher
 
 #############################################  rev_and_compl ##############################################
               
 def rev_and_compl(strand): #here, strands with non valid bases are left untouched
  
     my_dna = Seq(strand)
-    my_dna=my_dna.reverse_complement()
+    my_dna = my_dna.reverse_complement()
     rev_strand=str(my_dna)
             
     return rev_strand
@@ -26,75 +28,77 @@ def rev_and_compl(strand): #here, strands with non valid bases are left untouche
 #############################################  filter ##############################################
               
 def filter(sequence_temp): #decide whether to accept or not a strand according to special criterion
+#acts either on forward strands or on reverse strands, reverted and complemented
 
     if(key_filter==False):
         return True
     else: #choose the criterion at will, according to your needs
-        if (fixed_end_5prime not in sequence_temp[fw_primer_size_spec:]) and (fixed_end_3prime not in    sequence_temp):
-            return True
-    
-        else:
+        #MCO_alien_1=subprocess.check_output("./find_equal_pair.x "+sequence_temp+" "+fixed_end_5prime, shell=True)
+        MCO_alien_1=SequenceMatcher(None, fixed_end_5prime, sequence_temp).find_longest_match(0, len(fixed_end_5prime), 0, len(sequence_temp)).size
+        
+        if(int(MCO_alien_1)>=alien_bases): #here, ">=" means: if you have at least 'alien_bases' bases identifying you as an alien, you are an alien and you are stopped by the filter
             return False
+    
+        else: # you may as well be an alien including part of fixed_end_3prime
+            #MCO_alien_2=subprocess.check_output("./find_equal_pair.x "+sequence_temp+" "+fixed_end_3prime, shell=True)
+            MCO_alien_2=SequenceMatcher(None, fixed_end_3prime, sequence_temp).find_longest_match(0, len(fixed_end_3prime), 0, len(sequence_temp)).size
+            if(int(MCO_alien_2)<alien_bases):
+                return True # both criteria are satisfied, you are not an alien!
+            else:
+                return False
     
 #############################################  analyze_partial ##############################################
               
-def analyze_partial(sequence_temp, length, mycount, mycount_p, my_tot_valid, myfile, my_start, my_size): #analyze or forward or reverse strands
+def analyze_partial(sequence_temp, length, mycount_NRNF, mycount_p, my_tot_valid, myfile, my_start, my_size): #analyze or forward or reverse strands
         
     if (sequence_temp.startswith(my_start)): # select either forward or reverse sequences, according to key3
-        if(length!=L):
-            #sequence is shorter, do not delete last base
-            sequence_temp=sequence_temp[my_size:]
-        else:
-            sequence_temp=sequence_temp[my_size:-1] # then remove the corresponding primer and the last nucleotide
-        
-        mycount_p+=1
-        my_tot_valid+=1
-        
+        sequence_temp=sequence_temp[my_size:]
+       
         if(key3=="rev"):
             sequence_temp=rev_and_compl(sequence_temp)
-        myfile.write(sequence_temp + "\n")
+        
+        if (filter(sequence_temp)==True): #apply filter only after having reversed and complemented
+            mycount_p+=1
+            my_tot_valid+=1
+            
+            myfile.write(sequence_temp + "\n")
 
     else:
-        mycount+=1
+        mycount_NRNF+=1
 
-    return mycount, mycount_p, my_tot_valid
+    return mycount_NRNF, mycount_p, my_tot_valid
     
 #############################################  analyze_all ##############################################
               
-def analyze_all(sequence_temp,length,mycount,mycountF,mycountR,my_tot_valid,myfile1,myfile2,myfile3): #analyze both forward and reverse strands
+def analyze_all(sequence_temp,length,mycount_NRNF,mycountF,mycountR,my_tot_valid,myfile1,myfile2,myfile3): #analyze both forward and reverse strands
  
     if (sequence_temp.startswith(fw_primer)): # select either forward or reverse sequences, according to key3
-        if(length!=L):
-            #sequence is shorter, do not cancel last base
-            sequence_temp=sequence_temp[fw_primer_size:]
-        else:
-            sequence_temp=sequence_temp[fw_primer_size:-1] # then remove the corresponding primer and the last nucleotide
+        sequence_temp=sequence_temp[fw_primer_size:]
+        
+        if (filter(sequence_temp)==True):
+            mycountF+=1
+            my_tot_valid+=1
 
-        mycountF+=1
-        my_tot_valid+=1
-
-        myfile1.write(sequence_temp + "\n")
-        myfile2.write(sequence_temp + "\n")
+            myfile1.write(sequence_temp + "\n")
+            myfile2.write(sequence_temp + "\n")
         
     elif (sequence_temp.startswith(rev_primer)): # select reverse sequences
-        if(length!=L):
-            sequence_temp=sequence_temp[rev_primer_size:]
-        else:
-            sequence_temp=sequence_temp[rev_primer_size:-1] # then remove the corresponding primer and the last nucleotide
-            
-        mycountR+=1
-        my_tot_valid+=1
-
-        #reverse and complement: important! To be done after removing primer
+        sequence_temp=sequence_temp[rev_primer_size:]
+        
+        #reverse and complement: important! To be done before removing primer
         sequence_temp=rev_and_compl(sequence_temp)
         
-        myfile1.write(sequence_temp + "\n")
-        myfile3.write(sequence_temp + "\n")
+        if (filter(sequence_temp)==True):
+            mycountR+=1
+            my_tot_valid+=1
+
+            myfile1.write(sequence_temp + "\n")
+            myfile3.write(sequence_temp + "\n")
                 
     else:
-        mycount+=1
+        mycount_NRNF=mycount_NRNF+1
 
-    return mycount,mycountF,mycountR,my_tot_valid
+    return mycount_NRNF,mycountF,mycountR,my_tot_valid
 
 ############################################  process_FASTQ ############################################
 
@@ -126,7 +130,7 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     elif (key3=="fw" or key3=="rev"):
         file1 = open(specific_results+"/all.txt","w") # no need for separate files
         
-    count=0 #sequences neither forward nor reverse
+    count_NRNF=0 #sequences neither forward nor reverse
     countN=0 #sequences with non valid entries
     countF=0 #sequences forward
     countR=0 #sequences reverse
@@ -158,26 +162,26 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
                 sequence_temp=str(seq_record.seq[skip_bases:]) # write all sequences on this file
                 length=len(sequence_temp)
                 
-                if (lower_bound<=length and length<=L):
+                if (lower_bound<=length):
                     dist_lengths[length]+=1 # update the histogram of the distribution of the strand lengths
+                    if ('N' not in sequence_temp): #check the possible presence of 'N' nucleotides and remove those strings
+                        if(key3=="all"):
+                            count_NRNF,countF,countR,tot_valid=analyze_all(sequence_temp,length,count_NRNF,countF,countR,tot_valid,file1,file2,file3)
+                        
+                        elif(key3=="fw"):
+                            count_NRNF,countF,tot_valid=analyze_partial(sequence_temp,length,count_NRNF,countF,tot_valid,file1,fw_primer,fw_primer_size)
+                    
+                        elif(key3=="rev"):
+                            count_NRNF,countR,tot_valid=analyze_partial(sequence_temp,length,count_NRNF,countR,tot_valid,file1,rev_primer,rev_primer_size)
+                            
+                    else:
+                        countN+=1
+                    
                 else:
                     count_length_extra+=1
                     
                 tot+=1
                 
-                if ('N' not in sequence_temp and length>=lower_bound and filter(sequence_temp)==True): #check the possible presence of 'N' nucleotides and remove those strings
-                    if(key3=="all"):
-                        count,countF,countR,tot_valid=analyze_all(sequence_temp,length,count,countF,countR,tot_valid,file1,file2,file3)
-                    
-                    elif(key3=="fw"):
-                        count,countF,tot_valid=analyze_partial(sequence_temp,length,count,countF,tot_valid,file1,fw_primer,fw_primer_size)
-                
-                    elif(key3=="rev"):
-                        count,countR,tot_valid=analyze_partial(sequence_temp,length,count,countR,tot_valid,file1,rev_primer,rev_primer_size)
-                        
-                else:
-                    countN+=1
-                    
             else: #the Q of the string is too low
                 count_lowQ+=1
         else:
@@ -196,8 +200,8 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     if(key3=="all" or key3=="rev"):
         print (str(countR)+", {:.2f}".format(countR/tot*100)+"% sequences are reverse (i.e. {:.2f}% of the valid ones)".format(countR/tot_valid*100))
         
-    print (str(count)+", {:.2f}".format(count/tot*100)+"% sequences are neither reverse nor forward")
-    print (str(countN)+", {:.2f}".format(countN/tot*100)+"% sequences have non valid bases")
+    print (str(count_NRNF)+", {:.2f}".format(count_NRNF/tot*100)+"% sequences are neither reverse nor forward")
+    print (str(countN)+", {:.2f}".format(countN/tot*100)+"% sequences have non valid bases/are aliens")
     print (str(count_length_extra)+", {:.2f}".format(count_length_extra/tot*100)+"% sequences have a length smaller than {} or larger than {}".format(lower_bound,L))
     print (str(count_lowQ)+" strings (corresponding to {:.3f} % of the valid ones) have a too low quality".format(count_lowQ/tot_valid))
 
@@ -210,11 +214,13 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     #save the histogram of the strands lengths distribution
     np.savetxt(specific_results+"/dist_lengths.txt", dist_lengths, fmt='%d')
 
-    os.system("./find_MCO_serial.x "+specific_results+"/all.txt "+str(tot_valid)+" "+specific_results+"/all_MCO.txt "+str(target))
+    target_rc=rev_and_compl(str(target)); # necessary for the new find_MCO_serial version
+
+    os.system("./find_MCO_serial.x "+specific_results+"/all.txt "+str(tot_valid)+" "+specific_results+"/all_MCO.txt "+str(target_rc))
     
     if (key3=="all"): #do also separate analysis
-        os.system("./find_MCO_serial.x "+specific_results+"/fw.txt "+str(countF)+" "+specific_results+ "/fw_MCO.txt "+str(target))
-        os.system("./find_MCO_serial.x "+specific_results+"/rev.txt "+str(countR)+" "+specific_results+"/rev_MCO.txt "+str(target))
+        os.system("./find_MCO_serial.x "+specific_results+"/fw.txt "+str(countF)+" "+specific_results+ "/fw_MCO.txt "+str(target_rc))
+        os.system("./find_MCO_serial.x "+specific_results+"/rev.txt "+str(countR)+" "+specific_results+"/rev_MCO.txt "+str(target_rc))
         
     return tot_valid
     
@@ -225,9 +231,6 @@ def create_separate_MCO_folders(l,specific_results):
     for m in range (0,l+1): #resource length = l
         if not os.path.exists(specific_results+"/MCO_{}".format(m)):
             os.makedirs(specific_results+"/MCO_{}".format(m))
-        #else:
-            #clean files possibly already present
-        #    os.system("rm "+specific_results+"/MCO_{}/unique_MCO.txt".format(m))
             
     return
 
@@ -348,6 +351,8 @@ def top_n_full_evo (*args,n,results_folder,param,tot_valid):
             df_list.append(df) #save into list
             df_top_n.append(df[0:n]) # select top-n
             i+=1
+                    
+            cross_MCOs_top_n(df[0:n], fastq_file, full_folder) #call method for cross-MCOs matrix
         
     else:
         fastq_file_list_R1=args[0]
@@ -366,7 +371,9 @@ def top_n_full_evo (*args,n,results_folder,param,tot_valid):
             df_list.append(df) #save into list
             df_top_n.append(df[0:n]) # select top-n
             i+=1
-    
+            
+            cross_MCOs_top_n(df[0:n], fastq_file, full_folder) #call method for cross-MCOs matrix
+        
     a=0 #Incremented by 1 at each cycle
     # now track the evolution of the abundance of the dominant strands of each cycle with the other cycles
     for ID in cycles_IDs:
@@ -383,7 +390,7 @@ def top_n_full_evo (*args,n,results_folder,param,tot_valid):
                 found=False
                 for index2, row2 in df_list[j].iterrows(): #loop over df rows
                     if (row2['strand']==row['strand']):
-                        howmany=np.append(howmany,row2['abundance']/tot_valid[a])
+                        howmany=np.append(howmany,row2['abundance']/tot_valid[j])
                         found=True
                         break #I found it, go to the next j
                 if(found==False):
@@ -406,4 +413,28 @@ def top_n_full_evo (*args,n,results_folder,param,tot_valid):
                 
         a+=1
                 
+    return
+
+
+############################################  cross_MCOs_top_n ############################################
+
+# computes the matrix of cross-MCOs among the top-n sequences and prints it to a file
+                    
+def cross_MCOs_top_n(my_df, fastq_file, full_folder): #call method for cross-MCOs matrix
+        
+    cross_MCOs = np.zeros((n,n))
+    
+    #my_df contains the info about the top-n strands of that cycle
+    for i1, row1 in my_df.iterrows(): #loop over my_df rows - i.e. select one of the top winners of that cycle, in decreasing abundance order
+        for i2, row2 in my_df[i1+1:n].iterrows():
+            #compute MCO between them
+            seq1=row1['strand']
+            seq2=rev_and_compl(row2['strand'])
+            MCO_pair=SequenceMatcher(None, seq1, seq2).find_longest_match(0, len(seq1), 0, len(seq2)).size
+            cross_MCOs[i1][i2]=MCO_pair
+            cross_MCOs[i2][i1]=MCO_pair
+        
+    #save results
+    np.savetxt(full_folder+"/cross_MCOs.txt",cross_MCOs,fmt="%d")
+
     return
