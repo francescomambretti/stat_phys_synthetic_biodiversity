@@ -46,7 +46,3 @@ Another editable parameter is `results_folder`, which can be changed in case one
 - `find_equal_pair.x` detects the number of consecutive identical bases between two strands passed by command line. Based on the same routines of `find_MCO_serial`, simplified version, used to detect aliens
 - `module_functions.py`: process FASTQ files, filter sequences, sort them by abundance, reverse and complement strands, track the abundance of the top-`n` most abundant ones across cycles and compute their cross-MCO matrix
 - `main_plot.py`: generate text files and plots for RSA histograms, Shannon entropy associated to them, evolution of top-`n` strands, the fraction of total population covered by top-`n` individuals and the 2D histogram of (MCO,MCO_2nd). It calls `module_plots.py`.
-
---------------------------------- family\_search.py -------------------------------------
-
-A side utility is `family_search.py`: tracks the abundance of strands containing (or not) a (set of) given subsequence(s) along the experimental cycles (ususally backwards)

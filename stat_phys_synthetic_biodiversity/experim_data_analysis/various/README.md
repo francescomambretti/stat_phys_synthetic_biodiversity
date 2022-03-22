@@ -22,4 +22,14 @@ The code is described at the beginning of the .cpp file
 
 -------------------------------------
 
-`family_search.py`: tracks the abundance of strands containing (or not) a given subsequence along the experimental cycles
+`family_search.py`: tracks the abundance of strands containing (or not) a (set of) given subsequence(s) along the experimental cycles (ususally backwards)
+
+
+-------------------------------------
+
+`nullmodel_vs_exp_data.ipynb`: compare theoretical (null) model for the distribution of the Maximum Consecutive Overlap $\omega$ with experimental data
+
+-------------------------------------
+
+`decay_rate_and_MCO_LTO.ipynb`: MCO distribution trend, time dependence of the height of each single bin with and without dominant individuals. 
+Second part: 2D histogram and correlation between MCO and LTO of experimental data
