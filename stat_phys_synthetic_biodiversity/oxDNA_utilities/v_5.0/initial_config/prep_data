@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Original version by Nicolo' Pedrani
+# Edited by Francesco Mambretti, 07/04/2022 version
+
+FORCE=~/oxDNA_UTILS/forces
+
+echo ---------------------------------------------
+echo ------- preparing data for simulation -------
+echo ---------------------------------------------
+
+#start_pos.txt ready
+
+box=40
+box2=expr $box/2
+
+echo °°°°°°°°° start configurations °°°°°°°°°°°°°°
+python2.7 ~/oxDNA_UTILS/UTILS/generate-ft-caps.py $box seq.dat 25
+echo °°°°°°°° end start configurations °°°°°°°°°°°
+
+mv generated.dat start.conf
+mv generated.top top.top
+
+echo °°°°°°°°°° forces files °°°°°°°°°°°°°°°°°°°°°
+
+#traps to make strands closer one to each other - or to make strands closer to a given point
+#python harm_trap.py $box2 #generate trapharm.txt
+#python mut_trap.py #generate trapmut.txt and trapcaps.txt
+python rep_sphere.py $box2 #generate sphere.txt
+
+python $FORCE/generate_nico.py trapharm.txt harm_trap # generate harmonic_traps.txt 
+python $FORCE/generate_nico.py trapmut.txt mut_trap # generate mut_traps.txt
+#python $FORCE/generate_nico.py trapcaps.txt caps_trap # generate caps_traps.txt
+
+python $FORCE/generate_nico.py sphere.txt rep_sph
+
+#cat sphere.txt > forces.txt
+
+#cat harmonic_traps.txt > forces.txt # caps_traps.txt> forces.txt 
+cat sphere.txt mut_traps.txt > forces.txt
+
+echo °°°°°°°°° end forces files °°°°°°°°°°°°°°°°°°
+
+echo ---------------------------------------------
+echo ----------------- DONE ----------------------
+echo ---------------------------------------------

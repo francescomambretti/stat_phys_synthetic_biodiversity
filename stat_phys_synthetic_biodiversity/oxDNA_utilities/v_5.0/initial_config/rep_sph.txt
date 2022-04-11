@@ -1,0 +1,2576 @@
+{ 
+type = sphere 
+particle = 0
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 1
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 2
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 3
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 4
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 5
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 6
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 7
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 8
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 9
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 10
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 11
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 12
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 13
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 14
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 15
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 16
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 17
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 18
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 19
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 20
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 21
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 22
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 23
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 24
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 25
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 26
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 27
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 28
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 29
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 30
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 31
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 32
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 33
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 34
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 35
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 36
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 37
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 38
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 39
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 40
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 41
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 42
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 43
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 44
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 45
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 46
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 47
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 48
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 49
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 50
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 51
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 52
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 53
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 54
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 55
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 56
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 57
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 58
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 59
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 60
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 61
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 62
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 63
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 64
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 65
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 66
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 67
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 68
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 69
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 70
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 71
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 72
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 73
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 74
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 75
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 76
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 77
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 78
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 79
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 80
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 81
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 82
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 83
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 84
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 85
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 86
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 87
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 88
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 89
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 90
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 91
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 92
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 93
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 94
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 95
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 96
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 97
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 98
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 99
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 100
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 101
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 102
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 103
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 104
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 105
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 106
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 107
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 108
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 109
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 110
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 111
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 112
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 113
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 114
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 115
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 116
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 117
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 118
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 119
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 120
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 121
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 122
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 123
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 124
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 125
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 126
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 127
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 128
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 129
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 130
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 131
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 132
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 133
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 134
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 135
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 136
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 137
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 138
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 139
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 140
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 141
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 142
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 143
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 144
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 145
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 146
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 147
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 148
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 149
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 150
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 151
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 152
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 153
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 154
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 155
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 156
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 157
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 158
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 159
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 160
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 161
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 162
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 163
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 164
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 165
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 166
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 167
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 168
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 169
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 170
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 171
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 172
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 173
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 174
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 175
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 176
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 177
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 178
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 179
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 180
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 181
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 182
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 183
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 184
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 185
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 186
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 187
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 188
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 189
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 190
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 191
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 192
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 193
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 194
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 195
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 196
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 197
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 198
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 199
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 200
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 201
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 202
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 203
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 204
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 205
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 206
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 207
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 208
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 209
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 210
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 211
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 212
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 213
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 214
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 215
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 216
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 217
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 218
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 219
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 220
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 221
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 222
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 223
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 224
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 225
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 226
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 227
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 228
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 229
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 230
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 231
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 232
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 233
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 234
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 235
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 236
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 237
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 238
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 239
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 240
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 241
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 242
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 243
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 244
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 245
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 246
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 247
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 248
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 249
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 250
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 251
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 252
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 253
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 254
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 255
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 256
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 257
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 258
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 259
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 260
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 261
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 262
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 263
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 264
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 265
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 266
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 267
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 268
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 269
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 270
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 271
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 272
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 273
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 274
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 275
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 276
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 277
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 278
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 279
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 280
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 281
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 282
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 283
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 284
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 285
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 286
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 287
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 288
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 289
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 290
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 291
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 292
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 293
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 294
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 295
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 296
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 297
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 298
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 299
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 300
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 301
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 302
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 303
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 304
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 305
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 306
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 307
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 308
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 309
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 310
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 311
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 312
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 313
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 314
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 315
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 316
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 317
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 318
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 319
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 320
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
+{ 
+type = sphere 
+particle = 321
+center = 0.0,0.0,0.0
+stiff = 0.005
+r0 = 20.0
+rate = 0.0
+}
