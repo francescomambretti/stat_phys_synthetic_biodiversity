@@ -53,11 +53,11 @@ def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether 
     else: #it is a blocking cap
         if ((i-1) in pred_indexes):
             pos=pred_indexes.index(i-1)
-            low_i= (L_list[pos-1]+2*caps_l)*int(i/3)+L_list[pos-1]  #number of complete p+t1+t2 + another L bases for the current predator
+            low_i= (L_list[pos]+2*caps_l)*int(i/3)+L_list[pos]  #number of complete p+t1+t2 + another L bases for the current predator
             top_i= low_i+caps_l-1
         elif ((i-2) in pred_indexes):
             pos=pred_indexes.index(i-2)
-            low_i= (L_list[pos-2]+2*caps_l)*int(i/3)+L_list[pos-2]+caps_l
+            low_i= (L_list[pos]+2*caps_l)*int(i/3)+L_list[pos]+caps_l
             top_i= low_i+caps_l-1
         
         else: #the blocking cap is neither the left nor the right one, which is not possible!
