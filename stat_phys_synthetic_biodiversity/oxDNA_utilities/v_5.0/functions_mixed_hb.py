@@ -2,7 +2,7 @@
 ###
 ### Useful tools for mixed_hb_pair_evo.py code
 
-### 11/04/2022 version
+### 14/04/2022 version
 
 import numpy as np
 import sys
@@ -43,21 +43,19 @@ def compute_low_top (i, pred_indexes, res_indexes, pred_offset): #check whether 
             top_i=(i+1)*L_list[pos]-1
     
     elif (i in res_indexes): #it is a resource
+        pos=res_indexes.index(i)
         # pred_offset has already a different value depending on caps_l
-        if (caps_per_pred!=0):
-            low_i=pred_offset+1+(int(i/3)-n_pred)*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
-        else:
-            low_i=pred_offset+1+(i-n_pred)*l 
+        low_i=pred_offset+1+pos*l #index of the first nucleotide of i - the resource is preceded by pred_offset and by (possibly) other resources
         top_i=low_i+l-1
     
     else: #it is a blocking cap
         if ((i-1) in pred_indexes):
             pos=pred_indexes.index(i-1)
-            low_i= (L_list[pos]+2*caps_l)*int(i/3)+L_list[pos]  #number of complete p+t1+t2 + another L bases for the current predator
+            low_i= sum_partial_elems(L_list,0,pos)+(2*caps_l)*pos+L_list[pos]  #number of complete p+t1+t2 + another L bases for the current predator
             top_i= low_i+caps_l-1
         elif ((i-2) in pred_indexes):
             pos=pred_indexes.index(i-2)
-            low_i= (L_list[pos]+2*caps_l)*int(i/3)+L_list[pos]+caps_l
+            low_i= sum_partial_elems(L_list,0,pos)+(2*caps_l)*pos+L_list[pos]+caps_l
             top_i= low_i+caps_l-1
         
         else: #the blocking cap is neither the left nor the right one, which is not possible!
