@@ -14,7 +14,7 @@ N.B.: fixed bugs of the previous versions, affecting MCO and TMO computation.
 
 ******************************
 
-Where not differently indicated, the following scripts require Python 3.
+Where not differently indicated, the following scripts require Python 3:
 
 ******************************
 
@@ -35,17 +35,18 @@ From version 5.0, predator strands can have different lengths. Moreover, strands
 
 `loop_run.py` is used to execute several independent simulations. 
 
-Requires, as input parameter, whether to perform min (0), relax (1), MD (2) or restart from MD(3).
-According to the input option, the script executes `end`-`start` (specified inside the script) concurrent simulations, each one with a different random seed. 
-The code expects that the `prep_data` script has already been run.
+Requires, as input parameter, whether to perform min (0), relax (1), MD (2).
+According to the input option, the script executes n=`end`-`start` (specified inside the script) concurrent simulations, each one with a different random seed. 
+The code requires the `prep_data.py` script to have already been executed.
 
 ******************************
 
 `initial_config` is a folder that contains file which allow to set up the simulations. 
-`prep_data` is a Bash script which calls some Python scripts, with the target to generate external forces files, and the initial configuration and the topology files.
-This requires Python2!
+`prep_data.py` is a Python script which calls other Python scripts, with the target to generate external forces files, and the initial configuration and the topology files.
+`prep_data.py` substitutes the old `prep_data` Bash script.
 
-From this version, caps and fixed sequences are used in the simulations, held together by mutual traps.
+Python2 is still required for some of the Python scripts generating forces.
+See the dedicate README.md inside the folder.
 
 ******************************
 
@@ -62,4 +63,6 @@ From this version, caps and fixed sequences are used in the simulations, held to
 
 N.B.: these scripts work with Python 2!
 
+******************************
 
+Added all the `persistence_length` folder for computation and plot of tangent vectors correlation functions. Customized version, adapted also for strands with caps (it is possible to compute correlation function only on a fraction of the total strand). See dedicated README.md in the folder.
