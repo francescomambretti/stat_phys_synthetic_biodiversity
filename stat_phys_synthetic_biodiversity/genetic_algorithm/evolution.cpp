@@ -4,12 +4,14 @@
 // Genetic algorithm. Simulates the evolution of a population of ssDNAs, which have to compete for a limited set of resources.
 // Now the histograms printed are cycles+1, numbered from 0 (i.e. before the first cycle) to cycles (i.e. after the last)
 // Important feature added: the alpha parameter, 0<= alpha <= 1, regulates the amount of random selection process, being 1-alpha the amount of driven selection (i.e. option=0 or option=2)
+// Fixed bug affecting MCO computation wrt previous version
+// To simplify matching between pairs of bases, the resource is reverted and complemented at the beginning
 
 // To run: // mpiexec -np $PROCS ./evolution input.dat $SEED 0
 
 // Currently, mutation is off by default
 
-// 06/09/2021 version
+// 05/05/2022 version
 
 #include "functions.h"
 #include "global.h"
@@ -78,7 +80,8 @@ int main (int argc, char *argv[]) {
     uword iprint =  N_res/10; //print every 10 steps
  
     resource = randi<uvec>(l,distr_param(0,nbases-1)); // randi: generate object with random integer values in specified interval. uvec is a vector of unsigned integers. generate l elements, whose value is chosen between 0 and nbases-1. distr_param lives inside armadillo
-    initial_population(rnd);  //randomly generate initial population
+    rev_and_compl(resource); //reverse-complement the resource
+    initial_population(rnd); //randomly generate initial population
 
     #ifdef PRINT
     cout << "Population" << endl;
@@ -146,3 +149,5 @@ int main (int argc, char *argv[]) {
     
     return 0;
 }
+
+

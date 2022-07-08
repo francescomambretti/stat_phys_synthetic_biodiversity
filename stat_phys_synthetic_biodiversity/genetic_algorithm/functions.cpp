@@ -105,31 +105,46 @@ uword compute_affinity(uword i, Random& rnd) { //compute the value of the max co
     uword overlap; //counter for overlap
     
     //first cycle on all possible configurations, just in one direction (not considering possible reverse option)
-    //resource is long k genese and pred is l genese, so we have k(from right) +k (from left) + (n-k-1)(central possibilities)  possible overlaps with predator
+    //resource is long k genese and pred is l genes, so we have k(from right) +k (from left) + (n-k-1)(central possibilities)  possible overlaps with predator
     //I cycle on these starting from the left and going to right direction
     
-    uword limit = L+l-1; //rightmost possible coordinate of a nucleotide
     int p,r;
+    uword j;
     
-    for(uword j=0;j<limit;j++) { //loop over all the possible positions
+    for(j=0;j<L;j++) { //loop over all the possible positions
         overlap=0; //setting zero the overlap counter
-        //cycling on predator and resource genes that are overlapping
-        //with two variables.
         for (p=L-1-j, r=0; p<L && r<l; p++,r++) { //p: track the left end of the resource in the predator reference frame (fixed); r: track the internal resource coordinate
-            if (p<0) continue; //safe check
-            else {
-                if ( match(filaments.col(i)[p],resource(r)) )
-                    overlap++;
-                else {
-                    if (overlap > Max)
-                        Max = overlap;
-                    overlap=0;
-                }
+            if (filaments.col(i)[p]==resource(r))  //( match(filaments.col(i)[p],resource(r)) )
+                overlap++;
+            else {  //if there is a mismatch
+                if (overlap > Max)
+                    Max = overlap;
+                overlap=0;
             }
         }//end for p,r
         
-        if (overlap>Max)
+        if (overlap>Max) // useful when there is a group of matching bases at the last loop, which is not ended by any non-matching pair
             Max = overlap; //update max
+        
+    } //end for j
+    
+    for(j=0;j<l;j++){
+        overlap=0; //setting to zero the overlap counter
+        for (p=0, r=j+1; p<L && r<l; p++,r++) {
+            if (filaments.col(i)[p]==resource(r))//( match(filaments.col(i)[p],resource(r)) )
+                overlap++;
+        
+            else {  //if there is a mismatch
+                if (overlap > Max)
+                    Max = overlap;
+                overlap=0;
+            }
+        }//end for p,r
+        
+        if (overlap>Max){ // useful when there is a group of matching bases at the last loop, which is not ended by any non-matching pair
+            //MCO
+            Max = overlap; //update ma
+        }
         
     } //end for j
     
@@ -157,7 +172,7 @@ void total_fitness(Random& rnd) {
         exit(EXIT_FAILURE);
     }
 
-    Tot_Fit = sum(fitnesses); //probably useless
+    Tot_Fit = sum(fitnesses); //normalization
     #ifdef PRINT
     cout << "Total fitness " << Tot_Fit << endl;
     #endif
@@ -178,7 +193,8 @@ void Selection(Random& rnd, uword option) {
         for(;;) {
             predator = int(rnd.Rannyu(0, N_pred));
             x = rnd.Rannyu();
-            if ( ( x <= double(fitnesses(predator))/double(l) ) && ( all(results.col(0) != predator) ) )
+            //if ( ( x <= double(fitnesses(predator))/double(fitnesses.max()) ) && ( all(results.col(0) != predator) ) )
+            if ( ( x <= double(fitnesses(predator))/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
                 break;
         }
     } // use maximum consecutive overlap as fitness
@@ -200,7 +216,8 @@ void Selection(Random& rnd, uword option) {
                 cost=fitnesses(predator);
             
             x = rnd.Rannyu();
-            if ( ( x <= cost/double(l) ) && ( all(results.col(0) != predator) ) )
+            if ( ( x <= cost/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
+            //if ( ( x <= cost/double(fitnesses.max()) ) && ( all(results.col(0) != predator) ) )
                 break;
         }
     } // use maximum consecutive overlap with saturation as fitness
@@ -430,3 +447,26 @@ void shift_vector(uvec &v, int m, int n) {
 	}*/
 }
 
+//==========================
+// rev_and_compl
+//==========================
+
+void rev_and_compl(uvec &strand){
+
+    uvec strand1 = reverse(strand);
+    
+    for (uword i=0; i<strand.n_elem; i++){
+        if (strand1(i)==0)
+            strand1(i)=1;
+        else if (strand1(i)==1)
+            strand1(i)=0;
+        else if (strand1(i)==2)
+            strand1(i)=3;
+        else if (strand1(i)==3)
+            strand1(i)=2;
+    }
+
+    strand=strand1;
+
+    return;
+}

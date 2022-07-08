@@ -30,6 +30,6 @@ void Mutation(Random&,uvec&,int);
 void shift_vector(uvec&,int,int);
 void prepare_hist(uword);
 void print_vector(vector<string>, string);
-
+void rev_and_compl(uvec&);
 #endif 
 
