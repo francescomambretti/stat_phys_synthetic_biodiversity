@@ -1,4 +1,4 @@
-## README - Genetic Algorithm v 4.0
+## README - Genetic Algorithm v 5.0
 
 ************************************************************************************************************************************************
 
@@ -15,7 +15,7 @@
 ### Compile and execute
 To compile: `make`
 To remove object files and executable: `make clean`
-To execute: `mpiexec -np PROCS ./evolution        input file name     random generator seed       mutations on/off (1/0)` where `PROCS` is the chosen number of MPI parallel processes
+To execute: `mpiexec -np PROCS ./evolution        input file name     random generator seed       mutations on/off (1/0)    folder_for_output` where `PROCS` is the chosen number of MPI parallel processes
 
 ************************************************************************************************************************************************
 
@@ -25,7 +25,7 @@ To execute: `mpiexec -np PROCS ./evolution        input file name     random gen
 - `global.h` contains the declaration of global variables with the `extern` keyword
 - the random number class is declared and defined in the `random.h` and `random.cpp` files
 - `seed.in` contains the initial common seed, `Primes` contains couples of numbers used to distinguish the random numbers sequence generated for each rank, `input.dat` the input information and the `makefile` is self-explaining
-- Jupyter Notebooks and Python scripts for analysis are provided in the current version (see below)
+-  Python scripts for analysis are provided in the `scripts` folder (see below)``
 
 ************************************************************************************************************************************************
 
@@ -42,20 +42,31 @@ Currently, three selection criteria have been inserted:
 - purely random selection, regardless of the fitness of the predator - option 1
 The user has to choose one of them, and also has to set the value of the `alpha` parameter, which regulates the amount of purely random selection moves at each cycle (`alpha=0` means no random selection, `alpha=1` means only random selection).
 
-The code outputs a file called `histogram*.dat` for each generation `*`, which contains the list of the fitnesses of each of the survived predators, before the amplification process.
-The program also outputs some files named `pred_histF_cycle_*.dat` where `F` represents the fitness and `*` the cycle. This file contains the list of the `L`-long sequences having a fitness `F` after cycle `*`. This is a way to spot the emergence of dominating sequences during an evolution process.
+The code outputs a file called `histogram*.dat` for each generation `*`, which contains the histogram of the fitnesses of each of the survived predators, before the amplification process. (NEW FROM V_5.0).
+The code also outputs, for each cycle, the full list of the sequences with their fitness (Maximum Consecutive Overlap with the resource, ref. https://www.mdpi.com/1099-4300/24/4/458). The same list is also split in separate files for each MCO value.
 
 ************************************************************************************************************************************************
 
 ### Analysis
 
-Several scripts are provided here for analysis, in the `scripts` folder.
+Several scripts are provided here for analysis, in the `scripts` folder. These are much different from the previous versions
 
-- `compare_GA_experim.py`: this script compares the RSA histogram of an experimental cycle with all the corresponding histograms of all the simulated GA cycles for all the `alpha` values. It computes the RMS distance (Euclidean) between the simulated RSA histogram and the experimental one. It also performs the Kolmogorov-Smirnov test to confront the underlying distributions. Both quantities aim to estimate the best combination of (alpha,cycle index), so to minimize a distance in a given metrics between the GA histogram and the experimental one.
-Options for plot (one plot for each (alpha,cycle index)) are commented by default.
+- `analysis.py`: main script. The code processes all the simulations and analyses them, computing:
+# 0) the mean histogram p(MCO)
+# 1) the associated Shannon Entropy
+# 2) the number of unique sequences
+# 3) the Shannon Entropy associated to the Relative Species Abundance, where species=sequence
+# 4) the average omega of the population
+# 5) the zip ratio between the original and the zipped file size for the whole list
+# 6) the evolution of most abundant strands at each cycle
+# 7) the fraction of population covered by top-n individuals
 
-- `RSA_alpha.py`: script which analyzes the effect of the alpha parameter on the RSA histogram after the GA simulation. In particular, plot the RSA histogram for a single chosen cycle of the algorithm and for all the alpha values specified.
+The functions are implemented in `module_functions.py`.
 
-- `RSA_histo_evo.py`: plots some intermediate steps of the evolution of the RSA histogram during a GA simulation. Every `g` generations, the RSA histogram of all the independent simulations performed is averaged and errorbars are computed. As outcome, chosen a GA simulation with a given selection criterion, and for fixed `alpha`, the code outputs two plots with all the histograms superimposed, in linear and log scale.
+To execute: `python analysis.py`, after setting all the relevant parameters in `input_params.py`, which stores parameters & global options.
 
--`compare_ga_null_exp.py`: compare Genetic Algorithm results (for all the three selection criteria), the null model and the experimental data. Compare the RSA histogram of the desired set of GA cycles, the experimental histogram (at a given cycle) and the null models with/without threshold. Data are averaged over all the independent runs performed.
+- `main_plot.py` performs all the plots of the quantities listed above; some are plotted for each single seed, others are only plotted after averaging over parallel simulations. The script is also called at the end of  `analysis.py`. The associated methods are implemented in `module_plots.py`
+
+- The `regime` folder contains three scripts (main, input options and functions implementation) to compute and plot the mean trend of the abundance within a population of sequences having a given fitness. The groups are divided in small-, medium- and high- fitness.
+
+The `old` folder contains the script used in the previous versions: `compare_GA_experim.py`, `RSA_alpha.py`, `RSA_histo_evo.py`, `compare_ga_null_exp.py`.`

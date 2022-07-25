@@ -1,17 +1,14 @@
 // Original code by Nicolò Pedrani
 // Modified by Francesco Mambretti - 06/07/2021
 
-// Genetic algorithm. Simulates the evolution of a population of ssDNAs, which have to compete for a limited set of resources.
-// Now the histograms printed are cycles+1, numbered from 0 (i.e. before the first cycle) to cycles (i.e. after the last)
-// Important feature added: the alpha parameter, 0<= alpha <= 1, regulates the amount of random selection process, being 1-alpha the amount of driven selection (i.e. option=0 or option=2)
-// Fixed bug affecting MCO computation wrt previous version
-// To simplify matching between pairs of bases, the resource is reverted and complemented at the beginning
+// Genetic/Evolutive algorithm. Simulates the evolution of a population of sequences of nucleotides, which have to compete for a limited set of resources. The evolution can be a mix of fitness-driven and random contributions, with the alpha parameter, 0<= alpha <= 1, regulating the amount of random selection process, being 1-alpha the amount of driven selection (i.e. option=0 or option=2)
+// Now, it prints also the identities and the fitnesses of the individuals in the initial population
+// Now, the initial population built by any seed is the same
 
-// To run: // mpiexec -np $PROCS ./evolution input.dat $SEED 0
-
+// To run: // mpiexec -np $PROCS ./evolution    input.dat   $SEED   0   results_folder
 // Currently, mutation is off by default
 
-// 05/05/2022 version
+// 24/07/2022 version
 
 #include "functions.h"
 #include "global.h"
@@ -19,13 +16,15 @@
 #include <unistd.h>
 #include <stdio.h>
 
-//#define PRINT  //for output
+//#define PRINT  //for some output
 
 using namespace std;
 using namespace arma;
 
 int main (int argc, char *argv[]) {
 
+    // initialization
+    
     //MPI setup
     int procs,rank;
     MPI_Init(&argc,&argv);
@@ -33,110 +32,134 @@ int main (int argc, char *argv[]) {
     MPI_Comm_rank(MPI_COMM_WORLD,&rank);
     MPI_Status stat;
 
-    if (argc!=4) {
-        cerr << "insert input file name, random generator seed and if you want (1) or not (0) mutations during population update" << endl;
+    if (argc!=5) {
+        cerr << "insert input file name, random generator seed, if you want (1) or not (0) mutations during population update and the master folder for results" << endl;
         return -1;
     }
 
     input_name = argv[1];
     seed_rannyu = atoi(argv[2]);
     mut = atoi(argv[3]);
+    master_folder=argv[4];
 
-    int seed = seed_rannyu*(rank+1); // run several parallel simulations with different random seeds
+    int seed = 1; //for initial population generation - give the same to all ranks
     Read_input(); //each rank reads its own input file
     cout << "my name is rank " << rank << " of " << procs << " and my seed is " << seed << endl;
-
-    //each rank creates its own folder, copies there the important files and works inside it
-    string a = "mkdir seed"+to_string(seed);
-    cout << a << endl;
-    system(a.c_str());
-    string b = "seed"+to_string(seed);
-    chdir(b.c_str());
-    cout << "cd "+b << endl;
-    system("cp ../Primes ../seed.in ."); //copy essential files for the simulation
-    system("pwd");
-
-    //###########################################################
-    Random rnd = random_initialization(seed);
-    arma_rng::set_seed(2); // fix the seed for this, in order to give the same target to all the parallel ranks
-    //###########################################################
-
-    if (rank == 0) {
-        cout << "------------------------" << endl;
-        cout << "number of different bases: " << nbases <<endl;
-        cout << "genes per predator: " << L  << endl;
-        cout << "genes per resource: " << l << endl;
-        cout << "population size: " <<  N_pred<< endl;
-        cout << "resource population size: " <<  N_res << endl;
-        cout << "probability mutation: "<< p_m << endl;
-        cout << "random seed generator: " << seed << endl;
-        cout << "------------------------" << endl;
-        cout << endl;
-
-        if (mut)
-            cout << "you have chosen to do mutations during update" << endl;
-    }
     
-    uword iprint =  N_res/10; //print every 10 steps
- 
-    resource = randi<uvec>(l,distr_param(0,nbases-1)); // randi: generate object with random integer values in specified interval. uvec is a vector of unsigned integers. generate l elements, whose value is chosen between 0 and nbases-1. distr_param lives inside armadillo
-    rev_and_compl(resource); //reverse-complement the resource
-    initial_population(rnd); //randomly generate initial population
-
-    #ifdef PRINT
-    cout << "Population" << endl;
-    strands.print();
-    cout << "resource genes: " << endl;
-    resource.print();
-    #endif
+    //variables declaration & sizing
     results.set_size(N_res,2); //save the outcomes of a selection inside a generation: predator id & its fitness. N_res predators survive to each generation.
     name.set_size(N_res); // save the sequences of the winning 50mers
     fitnesses.set_size(N_pred); // save the fitness of each individual at each generation (overwritten)
 
+    //each rank creates its own folder, copies there the important files and works inside it
+    create_folders(master_folder,rank,seed);
+    
+    Random rnd = random_initialization(seed);
+    arma_rng::set_seed(123); // fix the seed for this, in order to give the same target resource to all the parallel ranks
+
+    if (rank == 0)
+        begin_cout(seed);
+    
+    uword iprint =  N_res/10; //print every * steps
+ 
+    //generate target strand
+    resource = randi<uvec>(l,distr_param(0,nbases-1)); // randi: generate object with random integer values in specified interval. uvec is a vector of unsigned integers. generate l elements, whose value is chosen between 0 and nbases-1. distr_param lives inside armadillo
+    rev_and_compl(resource); //reverse-complement the resource
+    
+    //randomly generate initial population and print it to file
+    field<string> initial_names=initial_population(rnd);
+    
+    #ifdef PRINT
+    cout << "Population" << endl;
+    individuals.print();
+    cout << "resource genes: " << endl;
+    #endif
+    
     if (rank==0)
         cout << "number of cycles: " << cycles << endl;
  
     wall_clock timer;
     timer.tic();
-    fstream out;
-    cout << endl;
+    ofstream outfile;
 
     // added: print histogram before selection cycles
-    out.open("histogram"+to_string(it)+".dat",ios::out);
+    system("pwd");
+    system("mkdir cycle_0");
     total_fitness(rnd); //compute the fitness of each individual
-    fitnesses.print(out);
-    out.close();
+    
+    //print initial pop. and their fitnesses
+    outfile.open("./initial_pop.dat", ios::out);
+    
+    //sort by fitness
+    uvec sorting_indices = sort_index(fitnesses);
+    fitnesses=sort(fitnesses);
+    
+    for (int i=0; i < N_pred; i++)
+        outfile << initial_names[sorting_indices[i]] << " " << fitnesses[i] << endl;
+    
+    outfile.close();
+    
+    outfile.open("./cycle_0/histogram.dat",ios::out);
+    uvec h1 = hist(fitnesses, linspace<vec>(0,l+1,l+1));
+    vec h2 = arma::conv_to<vec>::from(h1);
+    h2 = h2/sum(h2); //normalize between 0 and 1
+    
+    if (outfile.is_open()){
+        h2.print(outfile);
+    }
+    else{
+        cerr << "Error in opening file \n";
+        exit(-1);
+    }
+    outfile.close();
     
     uword i = 0;
     double r; // temporary random variable
+    vec v;
+    string command;
+    
+    //now, reset a different seed for any trajectory
+    seed=seed_rannyu*(rank+1); // run several parallel simulations with different random seeds
+    rnd = random_initialization(seed);
     
     for (it = 0; it<cycles; it++) {
         results.fill(-1);
-        out.open("histogram"+to_string(it+1)+".dat",ios::out);
+        command = "mkdir cycle_"+to_string(it+1);
+        system(command.c_str());
+        
+        outfile.open("./cycle_"+to_string(it+1)+"/histogram.dat",ios::out);
         total_fitness(rnd); //compute the fitness of each individual
         for(i=0;i< N_res;i++) {
          #ifdef PRINT
             cout << "selection and lunch" << endl;
          #endif
             r=rnd.Rannyu();
-            if (r<=alpha) // perform purely random selection
-                Selection(rnd,1); //decide which predator to be selected at the i-th algorithm step
-            else // apply driven selection criterion, usually option!=1
+            if (r>alpha) // apply driven selection criterion, usually option!=1
                 Selection(rnd,option); //decide which predator to be selected at the i-th algorithm step
+            else // perform purely random selection
+                Selection(rnd,1); //decide which predator to be selected at the i-th algorithm step
             
 			Lunch_time(rnd,i,predator); //save data of the winners inside results matrix
 			if (i%iprint == 0 and rank==0)
                 cout << "genetic algoritm step: " << i << endl;
         }
-        results.col(1).print(out);
+        v=conv_to<vec>::from(results.col(1)) ;
+        h1 = hist(v, linspace<vec>(0,l+1,l+1));
+        h2 = arma::conv_to<vec>::from(h1);
+        h2 = h2/sum(h2); //normalize between 0 and 1
+        h2.print(outfile);
         prepare_hist(it);
+        
         #ifdef PRINT
-        cout << "Update" << endl;
+        if (rank==0)
+            cout << "Update" << endl;
         #endif
+        
         Update(rnd); //amplify winning population for a new algorithm iteration
+        
         if (rank==0)
             cout << "---------# END CYCLE # " << it << "  ----------- " << endl;
-        out.close();
+        outfile.close();
     }
 
     chdir(".."); //exit from directory

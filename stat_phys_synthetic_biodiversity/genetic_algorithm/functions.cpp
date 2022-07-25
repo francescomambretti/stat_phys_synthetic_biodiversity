@@ -13,25 +13,24 @@ using namespace arma;
 int seed_rannyu;
 
 // -- Input parameters --//
-string input_name;
+string input_name, master_folder;
 uword it;
 uword cycles;
 int L, l, N_pred, N_res, nbases;
 bool mut;
-double p_m;
-// useful for simulation
+double p_m; //mutation
 uword Tot_Fit,predator, option;
 
 //vec for simulation
-umat filaments;
+umat individuals;
 uvec resource;
 field<string> name;
-uvec fitnesses;
+vec fitnesses;
 Mat<int> results; // matrix with 2 columns (predator, max overlap) and  N_res rows
 
-int asymp=12; // beyond this value, saturate the cost function
+int asymp=10; // beyond this value, saturate the cost function
 
-double alpha;
+double alpha; //fraction of random update moves
 
 //=================================================================================================================
 
@@ -74,6 +73,24 @@ Random random_initialization(int rank_index) {
    return rnd;
 }
 
+//==========================
+// create_folders
+//==========================
+
+void create_folders(string master_folder, int rank, int seed){
+    
+    string a = "mkdir "+master_folder+"/seed"+to_string(rank+1);
+    cout << a << endl;
+    system(a.c_str());
+    string b = master_folder+"/seed"+to_string(rank+1);
+    system(("cp Primes seed.in "+b).c_str()); //copy essential files for the simulation
+    chdir(b.c_str());
+    cout << "cd "+b << endl;
+    system("pwd");
+
+    return;
+}
+
 //=============
 // Read_input
 //=============
@@ -93,7 +110,33 @@ void Read_input() {
     ReadInput >> alpha; // fraction of purely random selection
 
     ReadInput.close();
+    
+    return;
 }
+
+//=============
+// begin_cout
+//=============
+//only rank 0 should call this method
+void begin_cout(int seed) {
+    
+    cout << "------------------------" << endl;
+    cout << "number of different bases: " << nbases <<endl;
+    cout << "genes per predator: " << L  << endl;
+    cout << "genes per resource: " << l << endl;
+    cout << "population size: " <<  N_pred<< endl;
+    cout << "resource population size: " <<  N_res << endl;
+    cout << "probability mutation: "<< p_m << endl;
+    cout << "random seed generator: " << seed << endl;
+    cout << "------------------------" << endl;
+    cout << endl;
+
+    if (mut)
+        cout << "you have chosen to do mutations during update" << endl;
+
+    return;
+}
+
 
 //==========================
 // compute_affinity
@@ -101,7 +144,7 @@ void Read_input() {
 
 uword compute_affinity(uword i, Random& rnd) { //compute the value of the max consecutive overlap between the target strand and the i-th predator
 
-    uword Max = 0; //it will be Max overlaps
+    uword Max = 0; //it will be Max overlap
     uword overlap; //counter for overlap
     
     //first cycle on all possible configurations, just in one direction (not considering possible reverse option)
@@ -114,7 +157,7 @@ uword compute_affinity(uword i, Random& rnd) { //compute the value of the max co
     for(j=0;j<L;j++) { //loop over all the possible positions
         overlap=0; //setting zero the overlap counter
         for (p=L-1-j, r=0; p<L && r<l; p++,r++) { //p: track the left end of the resource in the predator reference frame (fixed); r: track the internal resource coordinate
-            if (filaments.col(i)[p]==resource(r))  //( match(filaments.col(i)[p],resource(r)) )
+            if (individuals.col(i)[p]==resource(r))  //( match(individuals.col(i)[p],resource(r)) )
                 overlap++;
             else {  //if there is a mismatch
                 if (overlap > Max)
@@ -131,7 +174,7 @@ uword compute_affinity(uword i, Random& rnd) { //compute the value of the max co
     for(j=0;j<l;j++){
         overlap=0; //setting to zero the overlap counter
         for (p=0, r=j+1; p<L && r<l; p++,r++) {
-            if (filaments.col(i)[p]==resource(r))//( match(filaments.col(i)[p],resource(r)) )
+            if (individuals.col(i)[p]==resource(r))//( match(individuals.col(i)[p],resource(r)) )
                 overlap++;
         
             else {  //if there is a mismatch
@@ -143,7 +186,7 @@ uword compute_affinity(uword i, Random& rnd) { //compute the value of the max co
         
         if (overlap>Max){ // useful when there is a group of matching bases at the last loop, which is not ended by any non-matching pair
             //MCO
-            Max = overlap; //update ma
+            Max = overlap; //update max
         }
         
     } //end for j
@@ -188,13 +231,14 @@ void total_fitness(Random& rnd) {
 void Selection(Random& rnd, uword option) {
 
     double x, cost;
+    double max_fit=double(fitnesses.max());
     
     if (option==0){
-        for(;;) {
+        for(;;) { //loop until needed
             predator = int(rnd.Rannyu(0, N_pred));
             x = rnd.Rannyu();
-            //if ( ( x <= double(fitnesses(predator))/double(fitnesses.max()) ) && ( all(results.col(0) != predator) ) )
-            if ( ( x <= double(fitnesses(predator))/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
+            if ( ( x <= double(fitnesses(predator))/max_fit ) && ( all(results.col(0) != predator) ) )
+            //if ( ( x <= double(fitnesses(predator))/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
                 break;
         }
     } // use maximum consecutive overlap as fitness
@@ -216,15 +260,15 @@ void Selection(Random& rnd, uword option) {
                 cost=fitnesses(predator);
             
             x = rnd.Rannyu();
-            if ( ( x <= cost/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
-            //if ( ( x <= cost/double(fitnesses.max()) ) && ( all(results.col(0) != predator) ) )
+            //if ( ( x <= cost/double(Tot_Fit) ) && ( all(results.col(0) != predator) ) )
+            if ( ( x <= cost/max_fit ) && ( all(results.col(0) != predator) ) )
                 break;
         }
     } // use maximum consecutive overlap with saturation as fitness
 
     #ifdef PRINT
     cout << " the winning sequence is " << predator << endl;
-    filaments.col(predator).print();
+    individuals.col(predator).print();
     #endif
 
     return;
@@ -241,10 +285,19 @@ void Lunch_time(Random& rnd, uword o, uword pred) {
     results(o,0) = pred;  //o indexes the iteration index between 0 and N_res (i.e. the number of individuals which survive to each selection cycle, before amplification
 	results(o,1) = fitnesses(pred);
 	//cout << "max overlap: " << fitnesses(pred) << endl;
-// and the species name	
+    // and the species name
 	string a="";
-  	for (auto el : filaments.col(pred) )
-        a += to_string(el);
+    for (auto el : individuals.col(pred) ){
+        if (el==0)
+            a += 'A';
+        else if (el==1)
+            a += 'C';
+        else if (el==2)
+            a += 'G';
+        else if (el==3)
+            a += 'T';
+    }
+    
   	name(o) = a; //save the sequence of 50 nucleotides of the predator
     #ifdef PRINT
 	cout << "results" << endl;
@@ -256,35 +309,55 @@ void Lunch_time(Random& rnd, uword o, uword pred) {
 // prepare_hist
 //==========================
 
-void prepare_hist(uword it) {
+void prepare_hist(uword it) { //cycle index passed as argument
 
-	//cout << "------------ HISTOGRAMS --------------" << endl;
 	uvec predators;
-	vector<string> hist;
-	//results.print();
-	for (uword i=0;i<=l;i++) {
-		predators = find( results.col(1) == i );
+	vector<string> list_seqs;
+    string folder;
+    fstream outfile;
+    
+	for (uword i=0;i<=l;i++) { //loop over different MCO values
+		predators = find( results.col(1) == i ); //select all the predators with that MCO
+        
+        //for each cycle, create the folder
+        if (i==0){
+            folder="cycle_"+to_string(it);
+            system(("mkdir "+folder).c_str());
+            outfile.open(folder+"/list_seqs_all.dat",ios::out); //open file for cycle it
+            outfile << "sequence \t MCO \n";
+        }
+        
 		if (predators.size() != 0) {
-			//cout << "predators for maximum overlap of: " << i << endl;
-			//predators.print();
-			for (auto& el : predators) 
-				hist.push_back(name(el));
-			print_vector(hist,"pred_hist"+to_string(i)+"_cycle_"+to_string(it)+".dat");
-			hist.clear();
+			for (auto& el : predators)  //loop over predators
+                list_seqs.push_back(name(el));
+            
+			print_vector(list_seqs,folder+"/list_seqs_MCO_"+to_string(i)+".dat",0);
+            
+            //save on another file the full list & the omega of each sequence
+            for (auto el : list_seqs)
+                outfile << el << "\t" << i <<"\n";
+            
+            list_seqs.clear();
 		}
 	}
+    
+    outfile.close();//close stream
 
+    return;
 }
 
 //==========================
 // print_vector
 //==========================
 
-void print_vector(vector<string> v, string file) {
-	fstream fd;
-	fd.open(file,ios::out);
-	for (auto el : v) fd << el << "\n";
-	fd.close();
+void print_vector(vector<string> v, string file,int key) {
+	fstream outfile;
+    if (key==0)
+        outfile.open(file,ios::out);
+    else
+        outfile.open(file,ios::app);
+	for (auto el : v) outfile << el << "\n";
+	outfile.close();
 }
 
 
@@ -292,15 +365,16 @@ void print_vector(vector<string> v, string file) {
 // initial_population
 //==========================
 
-void initial_population(Random& rnd) {
+field<string> initial_population(Random& rnd) {
 //generate initial population of predators
     uword i;
     double x;
+    field<string> name (N_pred);
     
-    filaments.set_size(L,N_pred);
+    individuals.set_size(L,N_pred);
     if (nbases==2) {
         for (i=0;i<N_pred;i++){
-            for (auto& el : filaments.col(i)) {
+            for (auto& el : individuals.col(i)) {
                 if (rnd.Rannyu() < 0.5)
                     el = 0;
                 else
@@ -311,20 +385,30 @@ void initial_population(Random& rnd) {
     
     else if (nbases==4) {
         for (i=0;i<N_pred;i++){
-            for (auto& el : filaments.col(i)) {
+            for (auto& el : individuals.col(i)) {
                 x = rnd.Rannyu();
-                if (x < 0.25)
+                if (x < 0.25){
                     el = 0;
-                else if (x < 0.5 && x>=0.25)
+                    name(i)+='A';
+                }
+                else if (x < 0.5 && x>=0.25){
                     el = 1;
-                else if (x < 0.75 && x>=0.5)
+                    name(i)+='C';
+                }
+                else if (x < 0.75 && x>=0.5){
                     el = 2;
-                else
+                    name(i)+='G';
+                }
+                else{
                     el = 3;
+                    name(i)+='T';
+                }
             }
         }
     }//end else if
     
+    return name;
+
 }//end initial_population
 
 //==========================
@@ -350,7 +434,7 @@ void Update(Random& rnd) {
     //take the winning set of a given algorithm cycle and amplify them for the new generation
     umat new_population(L,N_pred);
 	uvec indices = conv_to<uvec>::from(results.col(0));
-	new_population.cols(0, N_res-1) = filaments.cols(indices);
+	new_population.cols(0, N_res-1) = individuals.cols(indices);
 	uvec appo;
     uword num_to_create=N_pred-N_res;
 
@@ -359,15 +443,15 @@ void Update(Random& rnd) {
 		new_population.col(N_res+i) = appo;
 	}
 
-	filaments = new_population;
+	individuals = new_population;
 
     if (mut) {
-	// this v is needed since filaments.col(i) does not support .begin() and .end() vector methods
+	// this v is needed since individuals.col(i) does not support .begin() and .end() vector methods
         uvec v;
         for (uword i=0;i<N_pred;i++) {
-            v = filaments.col(i);
+            v = individuals.col(i);
             Mutation(rnd,v,L);
-            filaments.col(i) = v;
+            individuals.col(i) = v;
         }
     }
 	
@@ -455,7 +539,7 @@ void rev_and_compl(uvec &strand){
 
     uvec strand1 = reverse(strand);
     
-    for (uword i=0; i<strand.n_elem; i++){
+    for (uword i=0; i<strand1.n_elem; i++){
         if (strand1(i)==0)
             strand1(i)=1;
         else if (strand1(i)==1)
@@ -465,7 +549,7 @@ void rev_and_compl(uvec &strand){
         else if (strand1(i)==3)
             strand1(i)=2;
     }
-
+    
     strand=strand1;
 
     return;

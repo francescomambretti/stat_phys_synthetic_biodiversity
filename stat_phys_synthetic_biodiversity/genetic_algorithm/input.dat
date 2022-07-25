@@ -1,12 +1,12 @@
+60
 50
-50
-50
+20
 100000
-10000
+1000
 4
 0.1
 0
-0.25
+0
 
   ReadInput >> cycles
   ReadInput >> predator length
