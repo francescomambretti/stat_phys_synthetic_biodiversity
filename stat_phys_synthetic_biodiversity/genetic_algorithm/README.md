@@ -52,14 +52,14 @@ The code also outputs, for each cycle, the full list of the sequences with their
 Several scripts are provided here for analysis, in the `scripts` folder. These are much different from the previous versions
 
 - `analysis.py`: main script. The code processes all the simulations and analyses them, computing:
-# 0) the mean histogram p(MCO)
-# 1) the associated Shannon Entropy
-# 2) the number of unique sequences
-# 3) the Shannon Entropy associated to the Relative Species Abundance, where species=sequence
-# 4) the average omega of the population
-# 5) the zip ratio between the original and the zipped file size for the whole list
-# 6) the evolution of most abundant strands at each cycle
-# 7) the fraction of population covered by top-n individuals
+ 0) the mean histogram p(MCO)
+ 1) the associated Shannon Entropy
+ 2) the number of unique sequences
+ 3) the Shannon Entropy associated to the Relative Species Abundance, where species=sequence
+ 4) the average omega of the population
+ 5) the zip ratio between the original and the zipped file size for the whole list
+ 6) the evolution of most abundant strands at each cycle
+ 7) the fraction of population covered by top-n individuals
 
 The functions are implemented in `module_functions.py`.
 
