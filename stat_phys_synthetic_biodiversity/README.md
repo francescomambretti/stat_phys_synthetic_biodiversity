@@ -1,4 +1,7 @@
-# synthetic_biodiversity_theo
-Theoretical statistical mechanics calculations and simulations for synthetic biodiversity project
 
-This repository contains the codes developed since February, 2021, about the Statistical Physics of Synthetic Biodiversity project @liphlab, University of Padova.
+This repository contains the codes developed by Francesco Mambretti between February, 2021 and March, 2023 for the Statistical Physics of Synthetic Biodiversity project @liphlab, University of Padova.
+
+- Analysis of experimental data
+- OxDNA simulations
+- Eco-evolutionary model
+- scripts
