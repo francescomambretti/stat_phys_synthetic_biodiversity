@@ -1,0 +1,52 @@
+# *******Input_relax:********
+
+## general input ###############
+        backend = CPU	
+	fix_diffusion = 0
+	back_in_box = 0
+
+## simulation option #############
+	sim_type = MD
+	dt = 0.005
+	verlet_skin = 0.3
+	steps = 1e8
+	thermostat = john
+	newtonian_steps = 108
+	diff_coeff = 2.5
+	T = 40C
+	interaction_type = DNA2
+	salt_concentration = 0.24
+	max_backbone_force = 5.
+	use_average_seq = no
+	seq_dep_file = oxDNA1_sequence_dependent_parameters.txt
+
+###########################################
+	topology = top.top
+########## questi sono importanti ######################
+	conf_file = stage1.dat
+	lastconf_file = relax.dat
+############## è da dove parte la simulazione successiva #####
+	trajectory_file = trajectory_relax.dat
+	print_conf_interval = 1e6
+	log_file= relax.output
+###### energy file #######################
+	energy_file = energy_relax.dat
+	print_energy_every = 1e6
+	no_stdout_energy = false
+	time_scale = linear
+	restart_step_counter = 1
+	refresh_vel = 1
+
+####### Forces ####################
+	external_forces = 1
+	external_forces_file = forces.txt
+######### output file ########################
+
+data_output_1 = {
+        print_every = 1e5
+        name = hb_list.dat
+        col_1 = {
+        type = hb_list
+        }
+        }
+

@@ -1,0 +1,128 @@
+{ 
+type = mutual_trap 
+particle = 52.0
+ref_particle = 327.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 327.0
+ref_particle = 52.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 327.0
+ref_particle = 52.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 52.0
+ref_particle = 327.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 319.0
+ref_particle = 60.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 60.0
+ref_particle = 319.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 60.0
+ref_particle = 319.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 319.0
+ref_particle = 60.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 175.0
+ref_particle = 312.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 312.0
+ref_particle = 175.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 312.0
+ref_particle = 175.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 175.0
+ref_particle = 312.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 300.0
+ref_particle = 187.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 187.0
+ref_particle = 300.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 187.0
+ref_particle = 300.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 300.0
+ref_particle = 187.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}

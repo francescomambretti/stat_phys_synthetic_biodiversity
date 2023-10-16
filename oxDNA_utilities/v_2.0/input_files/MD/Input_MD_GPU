@@ -1,0 +1,68 @@
+#*******Input_MD:********
+
+## general input ###############
+
+        backend = CUDA
+	backend_precision = mixed	
+#	seed = 2
+	fix_diffusion = 0
+	back_in_box = 0
+
+## simulation option #############
+
+	sim_type = MD
+	dt = 0.005
+	verlet_skin = 0.3
+	steps = 1e8
+	thermostat = john
+	newtonian_steps = 108
+	diff_coeff = 2.5
+	T = 40C
+	interaction_type = DNA2
+	salt_concentration = 0.24
+	use_average_seq = no
+	seq_dep_file = oxDNA1_sequence_dependent_parameters.txt
+
+###########################################
+	topology = top.top
+	conf_file = relax.dat
+	lastconf_file = MD.dat
+############## è da dove parte la simulazione successiva #####
+	trajectory_file = trajectory_MD.dat
+	print_conf_interval = 50000
+	log_file= MD.output
+###### energy file #######################
+	energy_file = energy_MD.dat
+	print_energy_every = 100000
+	no_stdout_energy = true
+	time_scale = linear
+	restart_step_counter = 1
+	refresh_vel = 1
+####### Forces ####################
+	#external_forces = 1
+	#external_forces_file = forces.txt
+######### output file ########################
+	max_io = 70 # Mbytes per seconds to be written
+
+# -----------------------------------#
+
+data_output_1 = {
+	print_every = 1000
+	name = hb_list.dat
+	col_1 = {
+	type = hb_list
+	}
+	}
+
+	data_output_2= {
+	name = pot_energy.dat
+	print_every = 100000 
+	col_1 = { 
+	type=potential_energy
+	split=true # vediamo tutti i contributi! 
+	} 
+	}
+
+
+
+

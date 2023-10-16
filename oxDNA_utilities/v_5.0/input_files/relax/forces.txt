@@ -1,0 +1,1024 @@
+{ 
+type = trap 
+particle = 0
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 1
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 2
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 3
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 4
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 5
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 6
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 7
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 8
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 9
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 10
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 11
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 12
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 13
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 14
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 15
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 16
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 17
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 18
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 19
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 20
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 21
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 22
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 23
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 24
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 25
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 26
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 27
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 28
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 29
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 30
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 31
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 32
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 33
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 34
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 35
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 36
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 37
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 38
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 39
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 40
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 41
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 42
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 43
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 44
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 45
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 46
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 47
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 48
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 49
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 50
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 51
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 52
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 53
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 54
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 55
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 56
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 57
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 58
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 59
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 60
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 61
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 62
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 63
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 64
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 65
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 66
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 67
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 68
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 69
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 70
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 71
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 72
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 73
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 74
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 75
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 76
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 77
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 78
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 79
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 80
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 81
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 82
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 83
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 84
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 85
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 86
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 87
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 88
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 89
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 90
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 91
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 92
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 93
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 94
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 95
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 96
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 97
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 98
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 99
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 100
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 101
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 102
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 103
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 104
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 105
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 106
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 107
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 108
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 109
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 110
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 111
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 112
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 113
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 114
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 115
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 116
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 117
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 118
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = trap 
+particle = 119
+rate = 0.0
+stiff = 0.005
+pos0 = 20.0,1.0,20.0
+dir = 0.0,0.0,0.0
+}
+{ 
+type = mutual_trap 
+particle = 44.0
+ref_particle = 111.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 111.0
+ref_particle = 44.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 108.0
+ref_particle = 47.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 47.0
+ref_particle = 108.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 69.0
+ref_particle = 118.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 118.0
+ref_particle = 69.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 109.0
+ref_particle = 78.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
+{ 
+type = mutual_trap 
+particle = 78.0
+ref_particle = 109.0
+stiff = 0.05
+r0 = 0.5
+PBC = 0
+}
