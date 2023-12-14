@@ -1,6 +1,6 @@
 # Written by Francesco Mambretti, 01/02/2022
 # custom module with functions used during experimental FASTQ files analysis
-# 21/03/2022 version
+# 05/12/2023 version - counter updated only if the read is kept
 
 import numpy as np
 import os
@@ -14,7 +14,8 @@ import pandas as pd
 from input_params import *
 import subprocess
 from difflib import SequenceMatcher
-
+import random
+from collections import ChainMap
 #############################################  rev_and_compl ##############################################
               
 def rev_and_compl(strand): #here, strands with non valid bases are left untouched
@@ -33,14 +34,12 @@ def filter(sequence_temp): #decide whether to accept or not a strand according t
     if(key_filter==False):
         return True
     else: #choose the criterion at will, according to your needs
-        #MCO_alien_1=subprocess.check_output("./find_equal_pair.x "+sequence_temp+" "+fixed_end_5prime, shell=True)
         MCO_alien_1=SequenceMatcher(None, fixed_end_5prime, sequence_temp).find_longest_match(0, len(fixed_end_5prime), 0, len(sequence_temp)).size
         
         if(int(MCO_alien_1)>=alien_bases): #here, ">=" means: if you have at least 'alien_bases' bases identifying you as an alien, you are an alien and you are stopped by the filter
             return False
     
         else: # you may as well be an alien including part of fixed_end_3prime
-            #MCO_alien_2=subprocess.check_output("./find_equal_pair.x "+sequence_temp+" "+fixed_end_3prime, shell=True)
             MCO_alien_2=SequenceMatcher(None, fixed_end_3prime, sequence_temp).find_longest_match(0, len(fixed_end_3prime), 0, len(sequence_temp)).size
             if(int(MCO_alien_2)<alien_bases):
                 return True # both criteria are satisfied, you are not an alien!
@@ -49,10 +48,11 @@ def filter(sequence_temp): #decide whether to accept or not a strand according t
     
 #############################################  analyze_partial ##############################################
               
-def analyze_partial(sequence_temp, length, mycount_NRNF, mycount_p, my_tot_valid, myfile, my_start, my_size): #analyze or forward or reverse strands
-        
+def analyze_partial(sequence_temp, length, mycount_NRNF, mycount_p, mycount_aliens, my_tot_valid, myfile, my_start, my_size): #analyze or forward or reverse strands
+
     if (sequence_temp.startswith(my_start)): # select either forward or reverse sequences, according to key3
-        sequence_temp=sequence_temp[my_size:]
+        #this can be modified - is due to the fact that many sequences do not have complete primers
+        sequence_temp=sequence_temp[25:75]
        
         if(key3=="rev"):
             sequence_temp=rev_and_compl(sequence_temp)
@@ -62,18 +62,22 @@ def analyze_partial(sequence_temp, length, mycount_NRNF, mycount_p, my_tot_valid
             my_tot_valid+=1
             
             myfile.write(sequence_temp + "\n")
+            
+        else:
+            mycount_aliens+=1
 
     else:
         mycount_NRNF+=1
 
-    return mycount_NRNF, mycount_p, my_tot_valid
+    return mycount_NRNF, mycount_p, my_tot_valid, mycount_aliens
     
 #############################################  analyze_all ##############################################
               
-def analyze_all(sequence_temp,length,mycount_NRNF,mycountF,mycountR,my_tot_valid,myfile1,myfile2,myfile3): #analyze both forward and reverse strands
+def analyze_all(sequence_temp,length,mycount_NRNF,mycountF,mycountR,mycount_aliens,my_tot_valid,myfile1,myfile2,myfile3): #analyze both forward and reverse strands
  
     if (sequence_temp.startswith(fw_primer)): # select either forward or reverse sequences, according to key3
-        sequence_temp=sequence_temp[fw_primer_size:]
+        #this can be modified - is due to the fact that many sequences do not have complete primers
+        sequence_temp=sequence_temp[25:75]
         
         if (filter(sequence_temp)==True):
             mycountF+=1
@@ -82,8 +86,14 @@ def analyze_all(sequence_temp,length,mycount_NRNF,mycountF,mycountR,my_tot_valid
             myfile1.write(sequence_temp + "\n")
             myfile2.write(sequence_temp + "\n")
         
+        else:
+            mycount_aliens+=1
+        
     elif (sequence_temp.startswith(rev_primer)): # select reverse sequences
-        sequence_temp=sequence_temp[rev_primer_size:]
+        if (length>upper_bound):
+            sequence_temp=sequence_temp[25:75]
+        else:
+            sequence_temp=sequence_temp[rev_primer_size:]
         
         #reverse and complement: important! To be done before removing primer
         sequence_temp=rev_and_compl(sequence_temp)
@@ -94,11 +104,14 @@ def analyze_all(sequence_temp,length,mycount_NRNF,mycountF,mycountR,my_tot_valid
 
             myfile1.write(sequence_temp + "\n")
             myfile3.write(sequence_temp + "\n")
-                
+        
+        else:
+            mycount_aliens+=1
+            
     else:
         mycount_NRNF=mycount_NRNF+1
 
-    return mycount_NRNF,mycountF,mycountR,my_tot_valid
+    return mycount_NRNF,mycountF,mycountR,my_tot_valid, mycount_aliens
 
 ############################################  process_FASTQ ############################################
 
@@ -135,6 +148,7 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     countF=0 #sequences forward
     countR=0 #sequences reverse
     count_lowQ=0 #count number of low-Q reads
+    count_aliens=0
     tot=0
     tot_valid=0
     
@@ -146,16 +160,18 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     dist_lengths=np.zeros(L+1)
 
     if (key2=="R1R2"):
-        seq_list_R1=SeqIO.parse(mother_folder+"/"+fastq_file_R1+".fastq", "fastq")
-        seq_list_R2=SeqIO.parse(mother_folder+"/"+fastq_file_R2+".fastq", "fastq")
-        container=chain(seq_list_R1,seq_list_R2)
+        seq_list_R1=SeqIO.index(mother_folder+"/"+fastq_file_R1+".fastq", "fastq")
+        seq_list_R2=SeqIO.index(mother_folder+"/"+fastq_file_R2+".fastq", "fastq")
+        container=ChainMap(seq_list_R1,seq_list_R2)
     else:
-        container=SeqIO.parse(mother_folder+"/"+fastq_file+".fastq", "fastq")
+        container=SeqIO.index(mother_folder+"/"+fastq_file+".fastq", "fastq")
+    key_list = list(container.keys())
 
     for seq_record in container: #SeqIO.parse(mother_folder+"/"+fastq_file+".fastq", "fastq"):
+        random_readname=key_list[ random.randint(0, len(key_list)-1) ] #random key
+        seq_record =container.get( random_readname ) #random sequence - OK for bootstrapping
         counter+=use_stop # True=1, False=0
         if (counter<stop): #this check is always true if use_stop==False, because counter is not updated
-        
             score=seq_record.letter_annotations["phred_quality"] #list of the quality score of each base
             if(min(score)>=min_Q): #else, the quality of the read is too low
         
@@ -166,24 +182,25 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
                     dist_lengths[length]+=1 # update the histogram of the distribution of the strand lengths
                     if ('N' not in sequence_temp): #check the possible presence of 'N' nucleotides and remove those strings
                         if(key3=="all"):
-                            count_NRNF,countF,countR,tot_valid=analyze_all(sequence_temp,length,count_NRNF,countF,countR,tot_valid,file1,file2,file3)
+                            count_NRNF,countF,countR,tot_valid,count_aliens=analyze_all(sequence_temp,length,count_NRNF,countF,countR,count_aliens,tot_valid,file1,file2,file3)
                         
                         elif(key3=="fw"):
-                            count_NRNF,countF,tot_valid=analyze_partial(sequence_temp,length,count_NRNF,countF,tot_valid,file1,fw_primer,fw_primer_size)
+                            count_NRNF,countF,tot_valid,count_aliens=analyze_partial(sequence_temp,length,count_NRNF,countF,count_aliens,tot_valid,file1,fw_primer,fw_primer_size)
                     
                         elif(key3=="rev"):
-                            count_NRNF,countR,tot_valid=analyze_partial(sequence_temp,length,count_NRNF,countR,tot_valid,file1,rev_primer,rev_primer_size)
+                            count_NRNF,countR,tot_valid,count_aliens=analyze_partial(sequence_temp,length,count_NRNF,countR,count_aliens,tot_valid,file1,rev_primer,rev_primer_size)
                             
                     else:
                         countN+=1
-                    
+                        counter-=use_stop                    
                 else:
                     count_length_extra+=1
-                    
+                    counter-=use_stop                    
                 tot+=1
                 
             else: #the Q of the string is too low
                 count_lowQ+=1
+                counter-=use_stop
         else:
             break  #interrupt, counter >= N
         
@@ -201,7 +218,8 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
         print (str(countR)+", {:.2f}".format(countR/tot*100)+"% sequences are reverse (i.e. {:.2f}% of the valid ones)".format(countR/tot_valid*100))
         
     print (str(count_NRNF)+", {:.2f}".format(count_NRNF/tot*100)+"% sequences are neither reverse nor forward")
-    print (str(countN)+", {:.2f}".format(countN/tot*100)+"% sequences have non valid bases/are aliens")
+    print (str(countN)+", {:.2f}".format(countN/tot*100)+"% sequences have non valid bases")
+    print (str(count_aliens)+", {:.2f}".format(count_aliens/tot*100)+"% sequences are aliens")
     print (str(count_length_extra)+", {:.2f}".format(count_length_extra/tot*100)+"% sequences have a length smaller than {} or larger than {}".format(lower_bound,L))
     print (str(count_lowQ)+" strings (corresponding to {:.3f} % of the valid ones) have a too low quality".format(count_lowQ/tot_valid))
 
@@ -214,7 +232,7 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
     #save the histogram of the strands lengths distribution
     np.savetxt(specific_results+"/dist_lengths.txt", dist_lengths, fmt='%d')
 
-    target_rc=rev_and_compl(str(target)); # necessary for the new find_MCO_serial version
+    target_rc=rev_and_compl(str(target)); # necessary for the new find_MCO_serial_bulge_tolerant version
 
     os.system("./find_MCO_serial.x "+specific_results+"/all.txt "+str(tot_valid)+" "+specific_results+"/all_MCO.txt "+str(target_rc))
     
@@ -222,7 +240,7 @@ def process_FASTQ(*args,mother_folder,results_folder,stop,use_stop,t): #args is 
         os.system("./find_MCO_serial.x "+specific_results+"/fw.txt "+str(countF)+" "+specific_results+ "/fw_MCO.txt "+str(target_rc))
         os.system("./find_MCO_serial.x "+specific_results+"/rev.txt "+str(countR)+" "+specific_results+"/rev_MCO.txt "+str(target_rc))
         
-    return tot_valid
+    return tot_valid, count_aliens
     
 ######################################## create_separate_MCO_folders #########################################
 
@@ -261,10 +279,12 @@ def detect_unique_strands(specific_results): #count how many distinct sequences 
     file1.write("strand"+'\t'+"MCO"+'\t'+"MCO_2nd"+'\t'+"TMO"+'\t'+"LTO"+'\t'+"abundance"+'\n')
     
     for temp_mco in np.arange(0,l+1):
-        file2 = open(specific_results+"/MCO_{}/unique_MCO.txt".format(temp_mco),"a")
-        file2.write("strand"+'\t'+"MCO"+'\t'+"MCO_2nd"+'\t'+"TMO"+'\t'+"LTO"+'\t'+"abundance"+'\n')
-        file2.close()
-
+        try:
+            file2 = open(specific_results+"/MCO_{}/unique_MCO.txt".format(temp_mco),"a")
+            file2.write("strand"+'\t'+"MCO"+'\t'+"MCO_2nd"+'\t'+"TMO"+'\t'+"LTO"+'\t'+"abundance"+'\n')
+            file2.close()
+        except:
+            pass
     # count the multiplicity of unique elements of list_strands, and save the strand with the relative overlap
     while (len(sorted_list)>0):
         strand,temp_mco,temp_mco_2nd,temp_tmo,temp_lto = sorted_list[0] #always take the first element

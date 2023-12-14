@@ -2,7 +2,7 @@
 #
 # Written by Francesco Mambretti, 01/02/2022
 #
-# Unified version of previous codes, no need to change source code for different datasets (i.e. different primers, target strand, output options, R1/R2, fw/rev). Now all is included in input_params.py
+# All input parameters are included in input_params.py
 #
 # The code processes all the files included in fastq_file_list and analyses them, conditioned to the quality score of the reads
 # 0) extracts the strand sequence from FASTQ files
@@ -16,7 +16,7 @@
 #
 # Sequences which are not recognized either as forward or as reverse, are not analyzed and counted as non valid ones.
 #
-# 21/03/2022 version
+# 14/12/2023 version
 
 ##### import #####
 import numpy as np
