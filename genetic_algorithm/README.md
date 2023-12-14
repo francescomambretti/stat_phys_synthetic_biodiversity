@@ -69,4 +69,4 @@ To execute: `python analysis.py`, after setting all the relevant parameters in `
 
 - The `regime` folder contains three scripts (main, input options and functions implementation) to compute and plot the mean trend of the abundance within a population of sequences having a given fitness. The groups are divided in small-, medium- and high- fitness.
 
-The `old` folder contains the script used in the previous versions: `compare_GA_experim.py`, `RSA_alpha.py`, `RSA_histo_evo.py`, `compare_ga_null_exp.py`.`
+The `old` folder contains the script used in the previous versions: `compare_GA_experim.py`, `RSA_alpha.py`, `RSA_histo_evo.py`, `compare_ga_null_exp.py`.
