@@ -5,3 +5,5 @@ This repository contains the codes developed by Francesco Mambretti between Febr
 - OxDNA simulations
 - Eco-evolutionary model
 - scripts
+
+Most of the results are published in \url{https://elifesciences.org/reviewed-preprints/90156}
